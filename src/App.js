@@ -1,11 +1,11 @@
-
+import React from 'react'
+import TrainingProgramForm from './Components/TrainingProgramForm'
 import './App.css';
-import TraningCalendar from './Components/TraningCalendar';
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-         <TraningCalendar/>
+      <TrainingProgramForm />
       </header>
     </div>
   );
