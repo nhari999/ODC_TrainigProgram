@@ -1,9 +1,21 @@
 import React, { useState } from 'react';
 import 'boosted/dist/css/boosted.min.css';
-
 function TrainingProgramForm() {
+  const [Success, Setsuccess] = useState(false)
+  const handleConfirm = () => {
+    Setsuccess(true);
+  };
+  const handlecancel =() =>{
+    Setsuccess(false)
+  }
   return (
     <div>
+      <div>{Success && (
+        <div className="alert alert-success" role="alert">
+          <span className="alert-icon"><span className="visually-hidden">Success</span></span>
+          <p>Training Program Has Been Added To Your Calendar</p>
+        </div>
+      )}</div>
       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', width: '750px' }}>
         <div style={{ border: '2px solid black', padding: '20px', borderRadius: '5px', width: '750px' }}>
           <h2 style={{ textAlign: 'center', marginBottom: '20px', marginTop: '10px' }}>Training Program Creation</h2>
@@ -36,9 +48,11 @@ function TrainingProgramForm() {
               <button className="btn btn-dropdown dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"></button>
             </div>
             <div className="d-grid gap-2 d-md-flex justify-content-md-end" style={{ marginBottom: '10px' }}>
-              <button type="button" className="btn btn-danger">Cancel</button>
-              <button type="button" className="btn btn-success">Confirm</button>
+              <button type="button" className="btn btn-danger"onClick={handlecancel}>Cancel</button>
+              <button type="button" className="btn btn-success" onClick={handleConfirm}>Confirm</button>
+
             </div>
+
           </form>
         </div>
         <div>
