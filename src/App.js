@@ -7,12 +7,13 @@ import Footer from './Components/Shared/Footer';
 import './App.css';
 import ManageAccount from './Components/ManageAccount';
 import Statistics from './Components/Statistics'
+import Layout from './Components/layout';
 
 function App() {
   return (
     <div className="App">
       <Router>
-        <SideBar />
+        <Layout />
         <Routes>
         <Route path="/TrainingProgramForm" element={<TrainingProgramForm />} />
           <Route path="/TrainingCalendar" element={<TrainingCalendar />} />
@@ -20,7 +21,7 @@ function App() {
           <Route path="/Statistics" element={<Statistics />} />
           <Route path="/" element={<TrainingCalendar />} />
         </Routes>
-        <Footer />
+  
       </Router>
     </div>
   );
