@@ -25,16 +25,6 @@ function TrainingProgramForm() {
               <input type="text" className="form-control" id="trainer" aria-label="Text input with dropdown button" style={{ width: '100%' }} />
               <button className="btn btn-dropdown dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"></button>
             </div>
-            <div className="form-group mb-3" style={{ marginBottom: '20px', width: '100%' }}>
-              <label>Email Template For Invitation :</label>
-              <input type="text" className="form-control" id="emailTemplate" aria-label="Text input with dropdown button" style={{ width: '100%' }} />
-              <button className="btn btn-dropdown dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"></button>
-            </div>
-            <div className="form-group mb-3" style={{ marginBottom: '20px', width: '100%' }}>
-              <label htmlFor="certificationTemplate">Template For Certification :</label>
-              <input type="text" className="form-control" id="certificationTemplate" aria-label="Text input with dropdown button" style={{ width: '100%' }} />
-              <button className="btn btn-dropdown dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"></button>
-            </div>
             <div className="d-grid gap-2 d-md-flex justify-content-md-end" style={{ marginBottom: '10px' }}>
               <button type="button" className="btn btn-danger">Cancel</button>
               <button type="button" className="btn btn-success">Confirm</button>

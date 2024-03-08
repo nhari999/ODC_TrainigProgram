@@ -1,5 +1,6 @@
 import React from 'react'
 import TrainingProgramForm from './Components/TrainingProgramForm'
+import TrainingCalendar from './Components/TraningCalendar'
 import './App.css';
 function App() {
   return (
