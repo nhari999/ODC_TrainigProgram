@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import 'boosted/dist/css/boosted.min.css';
 import "./Form.css"
-import SideBar from './SideBar'
-import { useEffect } from 'react';
 function TrainingProgramForm() {
   const [Success, Setsuccess] = useState(false);
   const [Name, Setname] = useState("");
@@ -10,37 +8,33 @@ function TrainingProgramForm() {
   const [Reminder, Setreminder] = useState("")
   const [coach, setCoach] = useState('');
   const [invalidInputs, setInvalidInputs] = useState(false);
-
   const handleCoachChange = (event) => {
     setCoach(event.target.textContent);
   };
-
   const handleConfirm = () => {
     if (!Name || !Start || !Reminder || !coach) {
       setInvalidInputs(true);
-      alert('One or more inputs are empty. Please fill in all fields.');
+      alert('Some inputs are empty. Please fill in all fields !');
     } else {
       setInvalidInputs(false);
       Setsuccess(true);
     }
   };
-
   const handleCancel = () => {
     Setsuccess(false);
   };
-
   return (
     <div>
       <div>{Success && (
-        <div className="alert alert-success" role="alert">
+        <div style={{paddingTop:'100px'}} className="alert alert-success" role="alert">
           <span className="alert-icon"><span className="visually-hidden">Success</span></span>
-          <p>Training Program Has Been Added To Your Calendar</p>
+          <p>Le programme a eté ajouter avec succés</p>
         </div>
       )}</div>
       <div className='FormBox'>
         <div className='FormBorder'>
           <h2 className='Title'>Training Program Creation</h2>
-          <form style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <form className='Forms'>
             <div className={`form-group ${invalidInputs && !Name && 'has-error'}`}>
               <label>Name :</label>
               <input type="text" className="form-control" value={Name} onChange={(e) => Setname(e.target.value)} id="name" aria-label="Username" aria-describedby="addon-wrapping" />
