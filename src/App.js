@@ -8,6 +8,7 @@ import './App.css';
 import ManageAccount from './Components/ManageAccount';
 import Statistics from './Components/Statistics'
 import Layout from './Components/layout';
+import ModifyForm from './Components/ModifyForm';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="/ManageAccount" element={<ManageAccount />} />
           <Route path="/Statistics" element={<Statistics />} />
           <Route path="/" element={<TrainingCalendar />} />
+          <Route path="/modifyForm" element={<ModifyForm />} />
         </Routes>
   
       </Router>
