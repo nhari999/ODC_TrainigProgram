@@ -51,7 +51,9 @@ function TraningCalendar() {
     return (
         <div style={{
             height:'95vh',
-            width:"70vw"
+            width:"70vw",
+            paddingTop: '90px',
+            paddingBottom:'20px'
         }}>
             
             <Calendar
