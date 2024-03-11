@@ -44,3 +44,9 @@
 .has-error .form-control {
     border-color: red;
   }
+
+.main-container {
+
+    margin-top: 300px;
+    margin-bottom: 300px;
+}

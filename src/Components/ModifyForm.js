@@ -52,16 +52,11 @@ function ModifyForm() {
 
   
     return (
-        <div>
-            <div>{Success && (
-                <div className="alert alert-success" role="alert">
-                    <span className="alert-icon"><span className="visually-hidden">Success</span></span>
-                    <p>Le programme a eté ajouter avec succés</p>
-                </div>
-            )}</div>
+        <div style={{marginTop:'300px',marginBottom:'300px'}}>
+            
             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', }}>
                 <div style={{ border: '2px solid grey', padding: '20px', borderRadius: '5px', width: '900px' }}>
-                    <h2 style={{ textAlign: 'center', marginBottom: '20px', marginTop: '10px' }}>Creation du Programme</h2>
+                    <h2 style={{ textAlign: 'center', marginBottom: '20px', marginTop: '10px' }}>Modification du Programme</h2>
                     <form style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                         <div className="form-group" style={{ marginBottom: '20px', width: '100%' }}>
                             <label>Nom :</label>
@@ -129,9 +124,14 @@ function ModifyForm() {
                 </div>
                 <div>
                 </div>
-                <footer>
-                </footer>
+               
             </div>
+            <div style={{marginTop:'20px'}}>{Success && (
+                <div className="alert alert-success" role="alert">
+                    <span className="alert-icon"><span className="visually-hidden">Success</span></span>
+                    <p>Le programme a eté modifié avec succés</p>
+                </div>
+            )}</div>
         </div>
     );
 };
