@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import TrainingProgramForm from './Components/TrainingProgramForm';
-import TrainingCalendar from './Components/TraningCalendar';
+import TrainingCalendar from './Components/TrainingCalendar';
 import './App.css';
 import ManageAccount from './Components/ManageAccount';
 import Statistics from './Components/Statistics'
