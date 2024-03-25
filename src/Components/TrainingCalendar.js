@@ -3,7 +3,9 @@ import { Calendar, dayjsLocalizer } from 'react-big-calendar'
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 import dayjs from 'dayjs'
 import '../calendarStyle.css'
-
+import { NavLink } from 'react-router-dom';
+import TrainingProgramList from './TrainingProgramList'
+import Statistics from './Statistics'
 function TrainingCalendar() {
     const [selectedEventDescription, setSelectedEventDescription] = useState(null);
 
@@ -12,21 +14,21 @@ function TrainingCalendar() {
             id: 1,
             start: dayjs("2024-03-13T12:00:00").toDate(),
             end: dayjs("2024-03-13T19:00:00").toDate(),
-            title: "Formation Python",
+            title: "Formation Python ",
             description: "This is a Python training session."
         },
         {
             id: 2,
             start: dayjs("2024-03-20T12:00:00").toDate(),
             end: dayjs("2024-03-20T19:00:00").toDate(),
-            title: "Formation JavaScript",
+            title: "Formation JavaScript ",
             description: "This is a JavaScript training session."
         },
         {
             id: 3,
             start: dayjs("2024-03-16T12:00:00").toDate(),
             end: dayjs("2024-03-16T19:00:00").toDate(),
-            title: "Introduction Cyber Sécurité",
+            title: "Introduction Cyber Sécurité ",
             description: "This is an introduction to Cyber Security."
         }
     ];
@@ -42,9 +44,12 @@ function TrainingCalendar() {
                     style={{ whiteSpace: 'normal'}}
                     onClick={() => setSelectedEventDescription(props.event.id === selectedEventDescription?.id ? props.event : null)}
                 >
-                    <div style={{fontWeight:'bold'}}>{props.event.title}</div>
+                    <div style={{fontWeight:'bold',margin:'3px'}}>{props.event.title}</div>
                     {selectedEventDescription?.id === props.event.id && (
-                        <div>{selectedEventDescription.description}</div>
+                        <div>
+                        <div style={{margin:'3px'}}>{selectedEventDescription.description}</div>
+                        <NavLink to="/Statistics" style={{color:'#ff7900'}}> Show Statistic Details </NavLink>
+                        </div>
                     )}
                 </div>
             );
@@ -57,7 +62,7 @@ function TrainingCalendar() {
 
     return (
         <div style={{
-            height: '95vh',
+            height: '105vh',
             width: "70vw",
             paddingTop: '90px',
             paddingBottom: '20px'
