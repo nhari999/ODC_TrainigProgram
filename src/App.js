@@ -6,8 +6,12 @@ import SideBar from './Components/Shared/SideBar';
 import Footer from './Components/Shared/Footer';
 import './App.css';
 import ManageAccount from './Components/ManageAccount';
-import Statistics from './Components/Statistics'
+import BarChart from "./Components/BarChart";
+import LineChart from "./Components/LineChart";
+import PieChart from "./Components/PieChart";
+import Statistic from './Components/Statistic'
 import Layout from './Components/layout';
+import CreateAccount from "./Components/CreateAccount"
 
 function App() {
   return (
@@ -18,7 +22,8 @@ function App() {
         <Route path="/TrainingProgramForm" element={<TrainingProgramForm />} />
           <Route path="/TrainingCalendar" element={<TrainingCalendar />} />
           <Route path="/ManageAccount" element={<ManageAccount />} />
-          <Route path="/Statistics" element={<Statistics />} />
+          <Route path="/Statistic" element={<Statistic />} />
+          <Route path="/CreateAccount" element={<CreateAccount />} />
           <Route path="/" element={<TrainingCalendar />} />
         </Routes>
   

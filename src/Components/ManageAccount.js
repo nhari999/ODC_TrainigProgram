@@ -5,10 +5,10 @@ function ManageAccount() {
   return (
     <div style={{width:"70%"}}>
       <div >
-        <h6 style={{  marginTop: "10%", fontSize: '4rem' }}>Manage Account Page</h6>
+        <h6 style={{  marginTop: "10%", fontSize: '4rem' }}>Manage Accounts</h6>
         <div style={{display:"flex", justifyContent:"space-between", marginBottom:"3%" }}>
 
-        <button type="button" class="btn btn-primary btn-lg" style={{ display: "flex", justifyContent: "center", borderRadius: "4%" ,height:"70%", width:"16%" }}>
+        <button onClick={() => window.location.href = "/CreateAccount"} type="button" class="btn btn-primary btn-lg" style={{ display: "flex", justifyContent: "center", borderRadius: "4%" ,height:"70%", width:"16%" }}>
           <img src={process.env.PUBLIC_URL + "/asset/add.png"} alt="Orange" style={{ width:"6%"}} />
           <text style={{ fontSize: "120%", color: "white" }} > Add</text>
         </button>
@@ -32,10 +32,10 @@ function ManageAccount() {
                   </label>
                 </div>
               </th>
-              <th scope="col">Image+Nom</th>
+              <th scope="col">Nom</th>
               <th scope="col">Email</th>
-              <th scope="col">Button Modify</th>
-              <th scope="col">Button delete</th>
+              <th scope="col"></th>
+              <th scope="col"></th>
             </tr>
           </thead>
           <tbody>
