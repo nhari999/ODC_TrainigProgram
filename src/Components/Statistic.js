@@ -100,7 +100,7 @@ function Statistic() {
             <thead>
               <tr>
                 <th scope="col"></th>
-                <th scope="col">année</th>
+                <th scope="col">Année</th>
                 <th scope="col">Nombre de participants</th>
                 <th scope="col">Nombre de participants admis</th>
               </tr>
