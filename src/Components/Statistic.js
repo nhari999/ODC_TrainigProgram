@@ -33,7 +33,7 @@ function Statistic() {
     labels: UserDataMois.map((data) => data.year),
     datasets: [
       {
-        label: "Participant admis",
+        label: "Participant refusé",
         data: UserDataMois.map((data) => data.userGain),
         backgroundColor: [
           "rgba(75,192,192,1)",
