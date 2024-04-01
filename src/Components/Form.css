@@ -1,0 +1,52 @@
+.form-group {
+    margin-bottom: 20px;
+    width: 100%;
+    
+}
+.form-control{
+    width: 100%;
+}
+.form-group mb-3{
+    margin-bottom: 20px;
+    width: 100%;
+}
+.FormBox{
+    display: flex;
+    justify-content:center; 
+    align-items: center; 
+    height: 100vh;
+    width:750px;
+    
+}
+.FormBorder{
+    border:2px solid black;
+    padding:20px;
+    border-radius: 5px;
+    width: 750px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;}
+.Title{
+    text-align: center;
+    margin-bottom: 20px;
+    margin-top: 10px;
+}
+.labelcoach{
+    padding-right: 579px;
+}
+.nav{
+    background-color: black;
+}
+#clearbutton{
+    background-color: green;
+    border: none;
+    width: 100px;
+    background-color: red;
+}
+.has-error .form-control {
+    border-color: red;
+  }
+
+.main-container {
+
+    margin-top: 300px;
+    margin-bottom: 300px;
+}
