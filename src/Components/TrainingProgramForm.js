@@ -82,7 +82,6 @@ function TrainingProgramForm() {
                       <button type="button" class="btn-close" data-bs-dismiss="modal" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Close"><span class="visually-hidden">Close</span></button>
                     </div>
                     <div class="modal-body">
-
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
@@ -94,18 +93,7 @@ function TrainingProgramForm() {
               <button type="button" className="btn btn-success" onClick={handleConfirm}>Confirm</button>
             </div>
           </form>
-          <footer className="footer navbar fixed-bottom" data-bs-theme="dark">
-            <h2 className="visually-hidden">Sitemap & information</h2>
-            <div className="container-fluid footer-terms">
-              <ul className="navbar-nav gap-md-3 d-flex justify-content-evenly" style={{ width: '100%' }}>
-                <li className="fw-bold">© Orange 2024</li>
-                <li><a className="nav-link" href="#">Terms and conditions</a></li>
-                <li><a className="nav-link" href="#">Privacy</a></li>
-                <li><a className="nav-link active" href="#" aria-current="page">Accessibility statement</a></li>
-                <li><a className="nav-link" href="#">Cookie policy</a></li>
-              </ul>
-            </div>
-          </footer>
+        
 
         </div>
       </div>
