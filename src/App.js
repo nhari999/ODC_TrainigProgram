@@ -6,6 +6,7 @@ import './App.css';
 import ManageAccount from './Components/ManageAccount';
 import Statistics from './Components/Statistics'
 import Layout from './Components/layout';
+import Login from './Components/Login';
 
 function App() {
   return (
@@ -13,13 +14,13 @@ function App() {
       <Router>
         <Layout />
         <Routes>
-        <Route path="/TrainingProgramForm" element={<TrainingProgramForm />} />
+          <Route path="/TrainingProgramForm" element={<TrainingProgramForm />} />
           <Route path="/TrainingCalendar" element={<TrainingCalendar />} />
           <Route path="/ManageAccount" element={<ManageAccount />} />
           <Route path="/Statistics" element={<Statistics />} />
-          <Route path="/" element={<TrainingCalendar />} />
+          <Route path="/Login" element={<Login/>} />
         </Routes>
-  
+
       </Router>
     </div>
   );

@@ -44,3 +44,8 @@
 .has-error .form-control {
     border-color: red;
   }
+.Forms{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}
