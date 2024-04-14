@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 
 
   return (
-    <div style={{width:"70%"}}>
+    <div style={{width:"70%" , marginLeft:" 10%"}}>
       <div >
         <h6 style={{  marginTop: "10%", fontSize: '4rem' }}>Manage Accounts</h6>
         <div style={{display:"flex", justifyContent:"space-between", marginBottom:"3%" }}>

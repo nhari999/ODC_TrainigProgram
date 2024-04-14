@@ -5,6 +5,7 @@ import PieChart from "./PieChart";
 import { UserData } from "./Data";
 import DonutChart from "./DonutChart";
 import { UserDataMois } from "./DataMois";
+import { UserDataForAge }  from "./DataForAge"
 
 function Statistic() {
 
@@ -16,6 +17,25 @@ function Statistic() {
       {
         label: "Participant admis",
         data: UserData.map((data) => data.userGain),
+        backgroundColor: [
+          "rgba(75,192,192,1)",
+          "#ecf0f1",
+          "#50AF95",
+          "#f3ba2f",
+          "#2a71d0",
+        ],
+        borderColor: "black",
+        borderWidth: 2,
+      },
+    ],
+  });
+
+  const [userData2, setUserData2] = useState({
+    labels: UserData.map((data) => data.year),
+    datasets: [
+      {
+        label: "Participant admis",
+        data: UserData.map((data) => data.percentage),
         backgroundColor: [
           "rgba(75,192,192,1)",
           "#ecf0f1",
@@ -48,6 +68,44 @@ function Statistic() {
     ],
   });
 
+  const [userDataMois2, setUserDataMois2] = useState({
+    labels: UserDataMois.map((data) => data.year),
+    datasets: [
+      {
+        label: "Participant refusé",
+        data: UserDataMois.map((data) => data.percentage),
+        backgroundColor: [
+          "rgba(75,192,192,1)",
+          "#ecf0f1",
+          "#50AF95",
+          "#f3ba2f",
+          "#2a71d0",
+        ],
+        borderColor: "black",
+        borderWidth: 2,
+      },
+    ],
+  });
+
+  const [userDataAge, setuserDataAge] = useState({
+    labels: UserDataForAge.map((data) => data.AgeRange),
+    datasets: [
+      {
+        label: "Participant refusé",
+        data: UserDataForAge.map((data) => data.nombreAdmis),
+        backgroundColor: [
+          "rgba(75,192,192,1)",
+          "#ecf0f1",
+          "#50AF95",
+          "#f3ba2f",
+          "#2a71d0",
+        ],
+        borderColor: "black",
+        borderWidth: 2,
+      },
+    ],
+  });
+
 
   const malePercentage = 60;
   const femalePercentage = 40;
@@ -66,18 +124,28 @@ function Statistic() {
         </div>
         <div style={{ display: "flex", justifyContent: "space-around" }}>
           <div className="chart-container" style={{ width: "60%", borderRadius: "2%", backgroundColor: "#f0f0f0", marginTop: "2%" }}>
-          {dateRange ? (
-  <BarChart chartData={userData} />
-) : (
-  <BarChart chartData={userDataMois} />
-)}
+
+  <BarChart chartData={userDataAge} />
+
+
+<div class="dropdown" style={{marginLeft:"32%" , marginTop:"6%"}}>
+  <button class="btn btn-dropdown dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Année
+  </button>
+  <ul class="dropdown-menu">
+    <li><a class="dropdown-item" href="#">2022</a></li>
+    <li><a class="dropdown-item" href="#">2021</a></li>
+    <li><a class="dropdown-item" href="#"> 2020</a></li>
+    <li><a class="dropdown-item" href="#"> 2019</a></li>
+  </ul>
+</div>
 
           </div>
           <div className="chart-container" style={{ width: "60%", borderRadius: "2%", backgroundColor: "#f0f0f0", marginLeft: "5%", marginTop: "2%" }}>
           {dateRange ? (
-  <PieChart chartData={userData} />
+  <PieChart chartData={userData2} />
 ) : (
-  <PieChart chartData={userDataMois} />
+  <PieChart chartData={userDataMois2} />
 )}
 
           </div>
