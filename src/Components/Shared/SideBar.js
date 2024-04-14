@@ -36,7 +36,7 @@ function SideBar() {
           </div>
         </div>
 
-        <div className="offcanvas offcanvas-start show" style={expanded ? {width:"20%"} : { width: '5%' }}  tabIndex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel" >
+        <div className="offcanvas offcanvas-start show" style={expanded ? {width:"18%"} : { width: '5%' }}  tabIndex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel" >
           <div className="offcanvas-header" style={{ justifyContent: "space-between" }}>
           {expanded ? (
   <img onClick={() => setExpanded((curr) => !curr)} src={process.env.PUBLIC_URL + "/asset/orange.png"} alt="Orange" style={{ width: "130px", height: "130px", marginTop: "20px" }} />

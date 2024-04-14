@@ -3,7 +3,7 @@ import 'boosted/dist/css/boosted.min.css';
 
 function ManageAccount() {
   return (
-    <div style={{width:"70%"}}>
+    <div style={{width:"70%" , marginLeft:" 10%"}}>
       <div >
         <h6 style={{  marginTop: "10%", fontSize: '4rem' }}>Manage Accounts</h6>
         <div style={{display:"flex", justifyContent:"space-between", marginBottom:"3%" }}>
