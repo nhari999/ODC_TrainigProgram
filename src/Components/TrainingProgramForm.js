@@ -1,125 +1,101 @@
 import React, { useState } from 'react';
 import 'boosted/dist/css/boosted.min.css';
-
-
+import "./Form.css"
 function TrainingProgramForm() {
-  const [Success, Setsuccess] = useState(false)
+  const [Success, Setsuccess] = useState(false);
+  const [Name, Setname] = useState("");
+  const [Start, Setstart] = useState("")
+  const [Reminder, Setreminder] = useState("")
+  const [coach, setCoach] = useState('');
+  const [invalidInputs, setInvalidInputs] = useState(false);
+  const handleCoachChange = (event) => {
+    setCoach(event.target.textContent);
+  };
   const handleConfirm = () => {
-    Setsuccess(true);
+    if (!Name || !Start || !Reminder || !coach) {
+      setInvalidInputs(true);
+      alert('Some inputs are empty. Please fill in all fields !');
+    } else {
+      setInvalidInputs(false);
+      Setsuccess(true);
+    }
   };
-  const handlecancel =() =>{
-    Setsuccess(false)
-  }
-
-  const [showTrainersDropdown, setShowTrainersDropdown] = useState(false);
-  const [selectedTrainer, setSelectedTrainer] = useState("");
-
-  const handleTrainerDropdownClick = () => {
-    setShowTrainersDropdown(!showTrainersDropdown);
-  };
-
-  const handleTrainerSelection = (trainer) => {
-    setSelectedTrainer(trainer);
-    setShowTrainersDropdown(false);
-  };
-
-  const [showEmailDropdown, setShowEmailDropdown] = useState(false);
-  const [selectedEmail, setSelectedEmail] = useState("");
-
-  const handleEmailDropdownClick = () => {
-    setShowEmailDropdown(!showEmailDropdown);
-  };
-
-  const handleEmailSelection = (Email) => {
-    setSelectedEmail(Email);
-    setShowEmailDropdown(false);
-  };
-  
-  const [showCertificateDropdown, setShowCertificateDropdown] = useState(false);
-  const [selectedCertificate, setSelectedCertificate] = useState("");
-
-  const handleCertificateDropdownClick = () => {
-    setShowCertificateDropdown(!showCertificateDropdown);
-  };
-
-  const handleCertificateSelection = (Certificate) => {
-    setSelectedCertificate(Certificate);
-    setShowCertificateDropdown(false);
+  const handleCancel = () => {
+    Setsuccess(false);
   };
   return (
     <div>
       <div>{Success && (
-        <div className="alert alert-success" role="alert">
+        <div style={{paddingTop:'100px'}} className="alert alert-success" role="alert">
           <span className="alert-icon"><span className="visually-hidden">Success</span></span>
           <p>Le programme a eté ajouter avec succés</p>
         </div>
       )}</div>
-      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh',  }}>
-        <div style={{ border: '2px solid grey', padding: '20px', borderRadius: '5px', width: '900px' }}>
-          <h2 style={{ textAlign: 'center', marginBottom: '20px', marginTop: '10px' }}>Creation du Programme</h2>
-          <form style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <div className="form-group" style={{ marginBottom: '20px', width: '100%' }}>
-              <label>Nom :</label>
-              <input type="text" className="form-control" id="name" style={{ width: '100%' }} aria-label="Username" aria-describedby="addon-wrapping" required />
+      <div className='FormBox'>
+        <div className='FormBorder'>
+          <h2 className='Title'>Training Program Creation</h2>
+          <form className='Forms'>
+            <div className={`form-group ${invalidInputs && !Name && 'has-error'}`}>
+              <label>Name :</label>
+              <input type="text" className="form-control" value={Name} onChange={(e) => Setname(e.target.value)} id="name" aria-label="Username" aria-describedby="addon-wrapping" />
             </div>
-            <div className="form-group" style={{ marginBottom: '20px', width: '100%' }}>
-              <label>Date de debut:</label>
-              <input type="date" className="form-control" id="startDate" style={{ width: '100%' }} placeholder="Date" aria-label="Username" aria-describedby="addon-wrapping" required/>
+            <div className={`form-group ${invalidInputs && !Start && 'has-error'}`}>
+              <label>Start Date :</label>
+              <input type="date" className="form-control" value={Start} onChange={(e) => Setstart(e.target.value)} id="startDate" placeholder="Date" aria-label="Username" aria-describedby="addon-wrapping" />
             </div>
-            <div className="form-group" style={{ marginBottom: '20px', width: '100%' }}>
-              <label>Date de rappel :</label>
-              <input type="date" className="form-control" id="reminderDate" style={{ width: '100%' }} placeholder="Name" aria-label="Username" aria-describedby="addon-wrapping" required />
+            <div className={`form-group ${invalidInputs && !Reminder && 'has-error'}`}>
+              <label>Reminder Date :</label>
+              <input type="date" className="form-control" value={Reminder} onChange={(e) => Setreminder(e.target.value)} id="reminderDate" placeholder="Name" aria-label="Username" aria-describedby="addon-wrapping" />
             </div>
-            <div className="form-group mb-3" style={{ marginBottom: '20px', width: '100%' }}>
-      
-        <label>Selection des Coachs :</label>
-        <div className="dropdown">
-          <input type="text" className="form-control" id="trainer" aria-label="Text input with dropdown button" style={{ width: '100%' }}   />
-          <button className="btn btn-dropdown dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" style={{ width: '20%' }}   onClick={handleTrainerDropdownClick}> Trainer List</button>
-          <ul className={`dropdown-menu ${showTrainersDropdown ? 'show' : ''}`}>
-            <li><button className="dropdown-item" type="button" onClick={() => handleTrainerSelection("Trainer 1")}>Coach 1</button></li>
-            <li><button className="dropdown-item" type="button" onClick={() => handleTrainerSelection("Trainer 2")}>Coach 2</button></li>
-            <li><button className="dropdown-item" type="button" onClick={() => handleTrainerSelection("Trainer 3")}>Coach 3</button></li>
-          </ul>
-        </div>
-
+            <label className='labelcoach'>Select Coaches :</label>
+            <div className={`input-group mb-3 ${invalidInputs && !coach && 'has-error'}`}>
+              <input
+                type="text"
+                className="form-control"
+                value={coach}
+                onChange={(event) => setCoach(event.target.value)}
+                aria-label="Text input with dropdown button"
+              />
+              <button
+                className="btn btn-dropdown dropdown-toggle"
+                type="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Dropdown
+              </button>
+              <ul className="dropdown-menu dropdown-menu-end">
+                <li><a className="dropdown-item" href="#" onClick={handleCoachChange}>Asma</a></li>
+                <li><a className="dropdown-item" href="#" onClick={handleCoachChange}>Mounib</a></li>
+                <li><a className="dropdown-item" href="#" onClick={handleCoachChange}>Malik</a></li>
+              </ul>
             </div>
-            <div className="form-group mb-3" style={{ marginBottom: '10px', width: '100%' }}>
-              <label>Email Template  :</label>
-              <div className="dropdown">
-              <input type="text" className="form-control" id="trainer" aria-label="Text input with dropdown button" style={{ width: '100%' }}  />
-          <button className="btn btn-dropdown dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" style={{ width: '20%' }}   onClick={handleEmailDropdownClick}> Email List </button>
-          <ul className={`dropdown-menu ${showEmailDropdown ? 'show' : ''}`}>
-            <li><button className="dropdown-item" type="button" onClick={() => handleEmailSelection("Email 1")}>Template 1</button></li>
-            <li><button className="dropdown-item" type="button" onClick={() => handleEmailSelection("Email 2")}>Template 2</button></li>
-            <li><button className="dropdown-item" type="button" onClick={() => handleEmailSelection("Email 3")}>Template 3</button></li>
-          </ul>
-          </div>
-            </div>
-            <div className="form-group mb-3" style={{ marginBottom: '10px', width: '100%' }}>
-            <label> Certificate Template :</label>
-            <div className="dropdown">
-              <input type="text" className="form-control" id="trainer" aria-label="Text input with dropdown button" style={{ width: '100%' }}  />
-          <button className="btn btn-dropdown dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"  style={{ width: '20%' }}  onClick={handleCertificateDropdownClick}> Certificate List</button>
-          <ul className={`dropdown-menu ${showCertificateDropdown ? 'show' : ''}`}>
-            <li><button className="dropdown-item" type="button" onClick={() => handleCertificateSelection("Certificate 1")}>Template 1</button></li>
-            <li><button className="dropdown-item" type="button" onClick={() => handleCertificateSelection("Certificate 2")}>Template 2</button></li>
-            <li><button className="dropdown-item" type="button" onClick={() => handleCertificateSelection("Certificate 3")}>Template 3</button></li>
-          </ul>
-          </div>
-            </div>
-            <div className="d-grid gap-2 d-md-flex justify-content-md-end" style={{ marginBottom: '10px' }}>
-              <button type="button" className="btn btn-danger"onClick={handlecancel}>Cancel</button>
+            <div className="d-grid gap-2 d-md-flex justify-content-md-end">
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" id='clearbutton'>
+                Cancel
+              </button>
+              <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title h5" id="exampleModalLabel">Are You Sure You Want To Cancel ?</h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Close"><span class="visually-hidden">Close</span></button>
+                    </div>
+                    <div class="modal-body">
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                      <button type="button" class="btn btn-primary" onClick={handleCancel}>Save changes</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
               <button type="button" className="btn btn-success" onClick={handleConfirm}>Confirm</button>
-
             </div>
-
           </form>
+        
+
         </div>
-        <div>
-        </div>
-        <footer>
-        </footer>
       </div>
     </div>
   );

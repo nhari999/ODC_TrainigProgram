@@ -1,7 +1,8 @@
 import React from 'react';
 import 'boosted/dist/css/boosted.min.css';
+import { NavLink } from 'react-router-dom';
 
-function ManageAccount() {
+
   return (
     <div style={{width:"70%" , marginLeft:" 10%"}}>
       <div >
@@ -17,9 +18,10 @@ function ManageAccount() {
         <button class="btn btn-primary" type="submit" style={{height:"90%",  borderRadius: "4%" }}>Search</button>
       </form>
 
+
         </div>
       </div>
-      <div class="table-responsive" style={{width:"100%"}}>
+      <div class="table-responsive" style={{ width: "100%" }}>
         <table class="table table-sm table-hover has-checkbox" >
 
           <thead>
@@ -39,99 +41,22 @@ function ManageAccount() {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>
-                <div class="form-check mb-0">
+            {users.map(user => (
+              <tr key={user.id}>
+                <td>
+                  <div class="form-check mb-0">
 
-                  <label class="form-check-label" for="customCheck1">
-                    <span class="visually-hidden">Select first row</span>
-                  </label>
-                </div>
-              </td>
-              <td > <img src={process.env.PUBLIC_URL + "/asset/avatar.png"}  style={{ width: "6%", marginTop:"0%", borderRadius:"50%" }} />  Ahmed Nhari </td>
-              <td>ahmed@gmail.com</td>
-              <td><button type="button" class="btn btn-outline-secondary" style={{ borderRadius: "8%" }}>Modify</button></td>
-              <td><button type="button" class="btn btn-danger" style={{ borderRadius: "8%" }}>Delete</button></td>
-            </tr>
-
-            <tr class="table-active">
-              <td>
-                <div class="form-check mb-0">
-
-                  <label class="form-check-label" for="customCheck3">
-                    <span class="visually-hidden">Select third row</span>
-                  </label>
-                </div>
-              </td>
-              <td> <img src={process.env.PUBLIC_URL + "/asset/imageAccount.png"}  style={{ width: "6%", marginTop:"0%", borderRadius:"50%"}} />Arij Fradi</td>
-              <td>Arij@gmail.com</td>
-              <td><button type="button" class="btn btn-outline-secondary" style={{ borderRadius: "8%" }}>Modify</button></td>
-              <td><button type="button" class="btn btn-danger" style={{ borderRadius: "8%" }}>Delete</button></td>
-            </tr>
-
-            <tr>
-              <td>
-                <div class="form-check mb-0">
-
-                  <label class="form-check-label" for="customCheck1">
-                    <span class="visually-hidden">Select first row</span>
-                  </label>
-                </div>
-              </td>
-              <td><img src={process.env.PUBLIC_URL + "/asset/imageAccount.png"}  style={{ width: "6%", marginTop:"0%", borderRadius:"50%"}} />selim soyah</td>
-              <td>selim@gmail.com</td>
-              <td><button type="button" class="btn btn-outline-secondary" style={{ borderRadius: "8%" }}>Modify</button></td>
-              <td><button type="button" class="btn btn-danger" style={{ borderRadius: "8%" }}>Delete</button></td>
-            </tr>
-
-            <tr class="table-active">
-              <td>
-                <div class="form-check mb-0">
-
-                  <label class="form-check-label" for="customCheck3">
-                    <span class="visually-hidden">Select third row</span>
-                  </label>
-                </div>
-              </td>
-              <td> <img src={process.env.PUBLIC_URL + "/asset/imageAccount.png"}  style={{ width: "6%", marginTop:"0%", borderRadius:"50%"}} />Mohamed kiki</td>
-              <td>kiki@gmail.com</td>
-              <td><button type="button" class="btn btn-outline-secondary" style={{ borderRadius: "8%" }}>Modify</button></td>
-              <td><button type="button" class="btn btn-danger" style={{ borderRadius: "8%" }}>Delete</button></td>
-            </tr>
-
-            <tr>
-              <td>
-                <div class="form-check mb-0">
-
-                  <label class="form-check-label" for="customCheck1">
-                    <span class="visually-hidden">Select first row</span>
-                  </label>
-                </div>
-              </td>
-              <td> <img src={process.env.PUBLIC_URL + "/asset/imageAccount.png"}  style={{ width: "6%", marginTop:"0%", borderRadius:"50%"}} />emna chouchane</td>
-              <td>emna@gmail.com</td>
-              <td><button type="button" class="btn btn-outline-secondary" style={{ borderRadius: "8%" }}>Modify</button></td>
-              <td><button type="button" class="btn btn-danger" style={{ borderRadius: "8%" }}>Delete</button></td>
-            </tr>
-
-            <tr class="table-active">
-              <td>
-                <div class="form-check mb-0">
-
-                  <label class="form-check-label" for="customCheck3">
-                    <span class="visually-hidden">Select third row</span>
-                  </label>
-                </div>
-              </td>
-              <td> <img src={process.env.PUBLIC_URL + "/asset/imageAccount.png"}  style={{ width: "6%", marginTop:"0%", borderRadius:"50%"}} />Aymen Gdhami</td>
-              <td>aymen@gmail.com</td>
-              <td><button type="button" class="btn btn-outline-secondary" style={{ borderRadius: "8%" }}>Modify</button></td>
-              <td><button type="button" class="btn btn-danger" style={{ borderRadius: "8%" }}>Delete</button></td>
-            </tr>
-            
-
-
-
+                    <label class="form-check-label" for={`customCheck${user.id}`}>
+                      <span class="visually-hidden">Select row {user.id}</span>
+                    </label>
+                  </div>
+                </td>
+                <td><img src={process.env.PUBLIC_URL + user.image} style={{ width: "6%", marginTop: "0%", borderRadius: "50%" }} /> {user.name}</td>
+                <td>{user.email}</td>
+                <td> <NavLink to="/modifyForm" className="btn btn-outline-secondary" style={{ borderRadius: "8%" }}>Modify</NavLink></td>
+                <td><button type="button" class="btn btn-danger" style={{ borderRadius: "8%" }}>Delete</button></td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
