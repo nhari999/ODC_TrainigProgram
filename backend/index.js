@@ -1,6 +1,7 @@
 const express = require('express')
 const app =express()
 const Model = require("./Model/User")
+const FormModel = require('./Model/Form');
 const cors = require('cors');
 const jwt = require('jsonwebtoken');
 app.use(cors());
@@ -30,6 +31,22 @@ app.post('/insert', async (req, res) => {
         res.status(500).json({ error: 'Internal server error' });
     }
 });
+app.post('/CreateForm', async (req, res) => {
+    try {
+      const { name, startDate, reminderDate, coaches } = req.body;  
+      const newForm = new FormModel({
+        name,
+        startDate,
+        reminderDate,
+        coaches
+      });
+      await newForm.save();  
+      res.status(201).json({ message: "Form data inserted successfully", form: newForm });
+    } catch (error) {
+      console.error("Error inserting form data:", error);
+      res.status(500).json({ error: "Internal server error" });
+    }
+  });
 app.post('/Login' , async (req,res)=>{
     const User = await Model.findOne({
         Email : req.body.Email,

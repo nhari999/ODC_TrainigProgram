@@ -10,6 +10,8 @@ import PieChart from "./Components/PieChart";
 import Statistic from './Components/Statistic'
 import Layout from './Components/layout';
 import Login from './Components/Login';
+import CreateAccount from "./Components/CreateAccount"
+import ModifyForm from "./Components/ModifyForm";
 
 
 function App() {

@@ -1,10 +1,7 @@
 import React from 'react';
 import 'boosted/dist/css/boosted.min.css';
 import { NavLink } from 'react-router-dom';
-
-
-  return (
-    <div style={{width:"70%" , marginLeft:" 10%"}}>
+/*<div style={{width:"70%" , marginLeft:" 10%"}}>
       <div >
         <h6 style={{  marginTop: "10%", fontSize: '4rem' }}>Manage Accounts</h6>
         <div style={{display:"flex", justifyContent:"space-between", marginBottom:"3%" }}>
@@ -60,9 +57,13 @@ import { NavLink } from 'react-router-dom';
           </tbody>
         </table>
       </div>
-    </div>
+    </div>*/ 
+function ManageAccount(){
+  return (
+    <div>
+      <p></p>
+    </div>    
+  )};
 
-  );
-}
 
 export default ManageAccount;
