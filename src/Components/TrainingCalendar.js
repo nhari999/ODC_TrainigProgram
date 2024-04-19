@@ -5,7 +5,7 @@ import dayjs from 'dayjs'
 import '../calendarStyle.css'
 import { NavLink } from 'react-router-dom';
 import TrainingProgramList from './TrainingProgramList'
-import Statistics from './Statistics'
+import Statistics from './Statistic'
 function TrainingCalendar() {
     const [selectedEventDescription, setSelectedEventDescription] = useState(null);
 
