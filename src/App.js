@@ -20,13 +20,13 @@ function App() {
       <Router>
         <Layout />
         <Routes>
-          <Route path="/TrainingProgramForm" element={<TrainingProgramForm />} />
+          {/* <Route path="/TrainingProgramForm" element={<TrainingProgramForm />} /> */}
           <Route path="/TrainingCalendar" element={<TrainingCalendar />} />
-          <Route path="/ManageAccount" element={<ManageAccount />} />
-          <Route path="/Statistic" element={<Statistic />} />
-          <Route path="/CreateAccount" element={<CreateAccount />} />
-          <Route path="/Login" element={<Login/>} />
-          <Route path="/modifyForm" element={<ModifyForm />} />
+          {/* <Route path="/ManageAccount" element={<ManageAccount />} /> */}
+          {/* <Route path="/Statistic" element={<Statistic />} /> */}
+          {/* <Route path="/CreateAccount" element={<CreateAccount />} /> */}
+          {/* <Route path="/Login" element={<Login/>} /> */}
+          {/* <Route path="/modifyForm" element={<ModifyForm />} /> */}
         </Routes>
 
       </Router>
