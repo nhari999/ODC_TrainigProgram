@@ -128,15 +128,15 @@ function Statistic() {
   <BarChart chartData={userDataAge} />
 
 
-<div class="dropdown" style={{marginLeft:"32%" , marginTop:"6%"}}>
-  <button class="btn btn-dropdown dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+<div className="dropdown" style={{marginLeft:"32%" , marginTop:"6%"}}>
+  <button className="btn btn-dropdown dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
     Année
   </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="#">2022</a></li>
-    <li><a class="dropdown-item" href="#">2021</a></li>
-    <li><a class="dropdown-item" href="#"> 2020</a></li>
-    <li><a class="dropdown-item" href="#"> 2019</a></li>
+  <ul className="dropdown-menu">
+    <li><a className="dropdown-item" href="#">2022</a></li>
+    <li><a className="dropdown-item" href="#">2021</a></li>
+    <li><a className="dropdown-item" href="#"> 2020</a></li>
+    <li><a className="dropdown-item" href="#"> 2019</a></li>
   </ul>
 </div>
 
