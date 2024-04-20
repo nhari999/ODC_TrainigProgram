@@ -4,10 +4,11 @@ import 'react-big-calendar/lib/css/react-big-calendar.css';
 import dayjs from 'dayjs';
 import '../calendarStyle.css';
 import Description from './Description';
+import { NavLink } from 'react-router-dom'; 
 
 function TrainingCalendar() {
     const [selectedEventDescription, setSelectedEventDescription] = useState(null);
-    const [showBox, setShowBox] = useState(false); // State to manage the visibility of the box
+    const [showBox, setShowBox] = useState(false); 
 
     const events = [
         {
@@ -16,7 +17,7 @@ function TrainingCalendar() {
             end: dayjs("2024-04-13T19:00:00").toDate(),
             title: "Formation Python",
             description: "This is a Python training session.",
-            coordinator :"Asma amdouni"
+            coordinator: "Asma amdouni"
         },
         {
             id: 2,
@@ -24,7 +25,7 @@ function TrainingCalendar() {
             end: dayjs("2024-04-20T19:00:00").toDate(),
             title: "Formation JavaScript",
             description: "This is a JavaScript training session.",
-            coordinator :"Asma amdouni"
+            coordinator: "Asma amdouni"
         },
         {
             id: 3,
@@ -32,27 +33,11 @@ function TrainingCalendar() {
             end: dayjs("2024-04-16T19:00:00").toDate(),
             title: "Introduction Cyber Sécurité",
             description: "This is an introduction to Cyber Security.",
-            coordinator :"Asma amdouni"
+            coordinator: "Asma amdouni"
         }
     ];
 
     const localizer = dayjsLocalizer(dayjs);
-
-    const components = {
-        event: props => {
-            return (
-                <div
-                    style={{ whiteSpace: 'normal'}}
-                    onClick={() => {
-                        setSelectedEventDescription(props.event);
-                        setShowBox(true);
-                    }}
-                >
-                    <div style={{fontWeight:'bold',margin:'3px'}}>{props.event.title}</div>
-                </div>
-            );
-        }
-    };
 
     const handleCloseDescription = () => {
         setShowBox(false);
@@ -64,9 +49,19 @@ function TrainingCalendar() {
             width: "70vw",
             paddingTop: '90px',
             paddingBottom: '20px',
-            position: 'relative', // Ensure proper positioning for the box
+            position: 'relative', 
         }}>
-            {/* Apply a blurry effect if showBox is true */}
+
+            <NavLink to="/TrainingProgramForm">
+                <button 
+                    className="addButton" 
+                    onClick={() => setShowBox(true)} 
+                >
+                    +
+                </button>
+            </NavLink>
+
+            
             {showBox && (
                 <div style={{
                     position: 'fixed',
@@ -74,24 +69,25 @@ function TrainingCalendar() {
                     left: 0,
                     width: '100%',
                     height: '100%',
-                    backdropFilter: 'blur(8px)', // Adjust the blur intensity as needed
-                    zIndex: 9998, // Ensure it's behind the Description box
+                    backdropFilter: 'blur(8px)', 
+                    zIndex: 9998, 
                 }}></div>
             )}
-            
+
             <Calendar
                 localizer={localizer}
                 events={events}
-                components={components}
+                onSelectEvent={event => {
+                    setSelectedEventDescription(event);
+                    setShowBox(true);
+                }}
             />
-            {/* Render Description component if showBox is true */}
+
             {showBox && selectedEventDescription && (
                 <Description event={selectedEventDescription} onClose={handleCloseDescription} />
             )}
         </div>
     );
-    
-    
 }
 
 export default TrainingCalendar;

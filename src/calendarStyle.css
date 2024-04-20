@@ -8,4 +8,66 @@
     background-color: black!important;
     
   }
-  
+  .rbc-btn-add {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: #007bff;
+    color: #fff;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    z-index: 9999;
+}
+
+.rbc-day-bg {
+    position: relative;
+}
+
+.rbc-btn-add:hover {
+    background-color: #0056b3;
+}
+.add-event-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  font-size: 24px;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Add shadow effect */
+}
+
+.add-event-button:hover {
+  background-color: #0056b3;
+}
+
+
+.addButton {
+    position: fixed;
+    top: 50%;
+    right: 5%;
+    transform: translateY(-50%);
+    z-index: 9;
+    padding: 10px;
+    border-radius: 50%;
+    font-size: 50px;
+    text-align: center;
+    background-color: #ff7900;
+    color: white;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    height: 100px;
+    width: 100px;
+}
+.addButton:hover{
+  background-color: black;
+}
