@@ -1,7 +1,5 @@
 import React from 'react';
 import 'boosted/dist/css/boosted.min.css';
-import { NavLink } from 'react-router-dom';
-/*<div style={{width:"70%" , marginLeft:" 10%"}}>
 
 function ManageAccount() {
   return (
@@ -130,20 +128,12 @@ function ManageAccount() {
               <td><button type="button" class="btn btn-outline-secondary" style={{ borderRadius: "8%" }}>Modify</button></td>
               <td><button type="button" class="btn btn-danger" style={{ borderRadius: "8%" }}>Delete</button></td>
             </tr>
-            
-
-
-
           </tbody>
         </table>
       </div>
-    </div>*/ 
-function ManageAccount(){
-  return (
-    <div>
-      <p></p>
-    </div>    
-  )};
+    </div>
 
+  );
+}
 
 export default ManageAccount;
