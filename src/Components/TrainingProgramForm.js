@@ -196,7 +196,7 @@ function TrainingProgramForm() {
               {startError && <small className="text-danger">{startError}</small>}
             </div>
             <div className={`form-group ${reminderError && 'has-error'}`}>
-              <label>Reminder Date :</label>
+              <label>End Date :</label>
               <input type="date" className="form-control" value={Reminder} onChange={(e) => Setreminder(e.target.value)} required />
               {reminderError && <small className="text-danger">{reminderError}</small>}
             </div>
