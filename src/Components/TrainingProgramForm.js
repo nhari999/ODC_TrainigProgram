@@ -80,7 +80,9 @@ function CoachSelection({ selectedCoaches, setSelectedCoaches }) {
     </div>
   );
 }
-
+/*{isSubmitting && ( // Show spinner at the top of the page when form is submitting
+        
+      )}*/ 
 function TrainingProgramForm() {
   const [Name, Setname] = useState("");
   const [Start, Setstart] = useState("");
@@ -89,6 +91,7 @@ function TrainingProgramForm() {
   const [nameError, setNameError] = useState("");
   const [startError, setStartError] = useState("");
   const [reminderError, setReminderError] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false); // Add isSubmitting state
 
   const handleSubmit = async () => {
     let hasError = false;
@@ -103,12 +106,18 @@ function TrainingProgramForm() {
     if (!Start) {
       setStartError("Please select a start date");
       hasError = true;
+    } else if (new Date(Start) < new Date()) {
+      setStartError("Start date should be today or a future date");
+      hasError = true;
     } else {
       setStartError("");
     }
-
+  
     if (!Reminder) {
       setReminderError("Please select a reminder date");
+      hasError = true;
+    } else if (new Date(Reminder) < new Date()) {
+      setReminderError("Reminder date should be today or a future date");
       hasError = true;
     } else {
       setReminderError("");
@@ -119,6 +128,7 @@ function TrainingProgramForm() {
     }
 
     if (!hasError) {
+      setIsSubmitting(true);
       try {
         const response = await fetch('http://localhost:4000/CreateForm', {
           method: 'POST',
@@ -139,12 +149,18 @@ function TrainingProgramForm() {
           Setstart("");
           Setreminder("");
           setSelectedCoaches([]);
+          setTimeout(() => {
+            window.location.href = "/TrainingCalendar"; 
+          }, 3000);
         } else {
           console.error('Error submitting form:', response.statusText);
         }
       } catch (error) {
         console.error('Error submitting form:', error);
-      }
+      } finally {
+        setTimeout(() => {
+          setIsSubmitting(false);
+        }, 3000);      }
     }
   };
 
@@ -158,6 +174,13 @@ function TrainingProgramForm() {
 
   return (
     <div>
+        {isSubmitting && ( 
+        <div className="d-flex justify-content-center mt-5">
+          <div className="spinner-border" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </div>
+        </div>
+      )}
       <div className='FormBox'>
         <div className='FormBorder'>
           <h2 className='Title'>Training Program Creation</h2>

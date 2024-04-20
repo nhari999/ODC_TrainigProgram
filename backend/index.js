@@ -6,6 +6,7 @@ const cors = require('cors');
 const jwt = require('jsonwebtoken');
 app.use(cors());
 app.use(express.json());
+const moment = require('moment');
 const mongoose = require("mongoose");
 mongoose.connect("mongodb://localhost:27017/OrangeDB")
 app.get('/msg',(req,res)=>{
@@ -34,6 +35,12 @@ app.post('/insert', async (req, res) => {
 app.post('/CreateForm', async (req, res) => {
     try {
       const { name, startDate, reminderDate, coaches } = req.body;  
+      if (!moment(startDate).isSameOrAfter(moment().format('YYYY-MM-DD'))) {
+        return res.status(400).json({ error: "Start date must be today or in the future" });
+      }
+      if (!moment(reminderDate).isSameOrAfter(moment().format('YYYY-MM-DD'))) {
+        return res.status(400).json({ error: "Reminder date must be today or in the future" });
+      }  
       const newForm = new FormModel({
         name,
         startDate,
