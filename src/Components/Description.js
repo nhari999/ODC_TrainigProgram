@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom';
 import 'boosted/dist/css/boosted.min.css';
 import './description.css'
 function Description({ event , onClose }) {
-    const { title, description, start, end, coordinator } = event;
+    const { title, coaches, start, end, coordinator } = event;
 
     return (
         <div className="description-container">
@@ -14,10 +14,10 @@ function Description({ event , onClose }) {
 
                 <button className="close-button" onClick={onClose}>X</button>
                 <h2>{title}</h2>
-                <p>{description}</p>
+                <p>{coaches}</p>
                 <p><strong>Start Date:</strong> {start.toString()}</p>
                 <p><strong>End Date:</strong> {end.toString()}</p>
-                <p><strong>Coordinator:</strong> {coordinator}</p>
+                {/* <p><strong>Coordinator:</strong> {coordinator}</p> */}
                 {/* <NavLink to="/Statistics" style={{ color: '#ff7900' }}> Show x²² Details </NavLink> */}
             </div>
         </div>

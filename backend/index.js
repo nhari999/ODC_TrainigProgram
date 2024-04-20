@@ -54,6 +54,17 @@ app.post('/CreateForm', async (req, res) => {
       res.status(500).json({ error: "Internal server error" });
     }
   });
+  app.get('/GetFormData', async (req, res) => {
+    try {
+        // Retrieve all form data from the database
+        const formData = await FormModel.find();
+        // Send the retrieved form data as a response
+        res.status(200).json(formData);
+    } catch (error) {
+        console.error("Error fetching form data:", error);
+        res.status(500).json({ error: "Internal server error" });
+    }
+});
 app.post('/Login' , async (req,res)=>{
     const User = await Model.findOne({
         Email : req.body.Email,
