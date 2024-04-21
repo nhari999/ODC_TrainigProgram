@@ -46,6 +46,9 @@
     height: 100vh;
     width: 800px;
 }
+#coachselect{
+    margin-right: 50px;
+}
 
 .FormBox {
     display: flex;
