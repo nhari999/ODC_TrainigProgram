@@ -111,12 +111,12 @@ function TrainingProgramForm() {
     } else {
       setStartError("");
     }
-  
+
     if (!Reminder) {
       setReminderError("Please select a reminder date");
       hasError = true;
-    } else if (new Date(Reminder) < new Date()) {
-      setReminderError("Reminder date should be today or a future date");
+    }else if (new Date(Reminder) < new Date(Start) || new Date(Reminder) < new Date() ) { 
+      setReminderError("End date must be after the start date Or At the same day !");
       hasError = true;
     } else {
       setReminderError("");
@@ -125,7 +125,6 @@ function TrainingProgramForm() {
       alert("Please select at least one coach.");
       hasError = true;
     }
-
     if (!hasError) {
       setIsSubmitting(true);
       try {
@@ -148,9 +147,9 @@ function TrainingProgramForm() {
           Setstart("");
           Setreminder("");
           setSelectedCoaches([]);
-          setShowSpinner(true); // Show spinner after successful form submission
+          setShowSpinner(true);
           setTimeout(() => {
-            window.location.href = "/TrainingCalendar"; 
+            window.location.href = "/TrainingCalendar";
           }, 3000);
         } else {
           console.error('Error submitting form:', response.statusText);
@@ -160,7 +159,7 @@ function TrainingProgramForm() {
       } finally {
         setTimeout(() => {
           setIsSubmitting(false);
-        }, 3000);
+        }, 1500);
       }
     }
   };

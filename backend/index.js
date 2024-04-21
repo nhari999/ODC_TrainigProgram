@@ -34,26 +34,28 @@ app.post('/insert', async (req, res) => {
 });
 app.post('/CreateForm', async (req, res) => {
     try {
-      const { name, startDate, reminderDate, coaches } = req.body;  
-      if (!moment(startDate).isSameOrAfter(moment().format('YYYY-MM-DD'))) {
-        return res.status(400).json({ error: "Start date must be today or in the future" });
-      }
-      if (!moment(reminderDate).isSameOrAfter(moment().format('YYYY-MM-DD'))) {
-        return res.status(400).json({ error: "Reminder date must be today or in the future" });
-      }  
-      const newForm = new FormModel({
-        name,
-        startDate,
-        reminderDate,
-        coaches
-      });
-      await newForm.save();  
-      res.status(201).json({ message: "Form data inserted successfully", form: newForm });
+        const { name, startDate, reminderDate, coaches } = req.body;
+        if (!moment(startDate).isSameOrAfter(moment().format('YYYY-MM-DD'))) {
+            return res.status(400).json({ error: "Start date must be today or in the future" });
+        }
+        if (!moment(reminderDate).isSameOrAfter(startDate) || (!moment(reminderDate).isSameOrAfter(moment().format('YYYY-MM-DD')))) {
+            return res.status(400).json({ error: "Reminder date must be after the start date" });
+        }
+        const newForm = new FormModel({
+            name,
+            startDate,
+            reminderDate,
+            coaches
+        });
+
+        await newForm.save();
+
+        res.status(201).json({ message: "Form data inserted successfully", form: newForm });
     } catch (error) {
-      console.error("Error inserting form data:", error);
-      res.status(500).json({ error: "Internal server error" });
+        console.error("Error inserting form data:", error);
+        res.status(500).json({ error: "Internal server error" });
     }
-  });
+});
   app.get('/GetFormData', async (req, res) => {
     try {
         // Retrieve all form data from the database
