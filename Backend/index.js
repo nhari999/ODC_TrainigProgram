@@ -68,6 +68,25 @@ app.post('/Login' , async (req,res)=>{
     }
 
 })
+
+app.get('/statistics', authenticateToken, async (req, res) => {
+    try {
+      // Fetch data from the 'statistic' collection
+      const statistics = await Statistic.find({}, { _id: 0, year: 1, userGain: 1 });
+      
+      // If data found, send it as response
+      if (statistics.length > 0) {
+        return res.status(200).json({ statistics });
+      } else {
+        return res.status(404).json({ error: 'No statistics found' });
+      }
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  });
+  
+
 const port = 4000;
 app.listen(port , ()=>{
     console.log(`Server Is Running On Port ${port}`)

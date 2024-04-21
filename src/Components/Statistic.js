@@ -5,7 +5,8 @@ import PieChart from "./PieChart";
 import { UserData } from "./Data";
 import DonutChart from "./DonutChart";
 import { UserDataMois } from "./DataMois";
-import { UserDataForAge }  from "./DataForAge"
+import { UserDataForAge }  from "./DataForAge";
+import DataForTableStat from "./DataForTableStat"
 
 function Statistic() {
 
@@ -15,7 +16,7 @@ function Statistic() {
     labels: UserData.map((data) => data.year),
     datasets: [
       {
-        label: "Participant admis",
+        label: "Participant qui possede une note > valeur moyenne",
         data: UserData.map((data) => data.userGain),
         backgroundColor: [
           "rgba(75,192,192,1)",
@@ -29,6 +30,7 @@ function Statistic() {
       },
     ],
   });
+  
 
   const [userData2, setUserData2] = useState({
     labels: UserData.map((data) => data.year),
@@ -142,11 +144,23 @@ function Statistic() {
 
           </div>
           <div className="chart-container" style={{ width: "60%", borderRadius: "2%", backgroundColor: "#f0f0f0", marginLeft: "5%", marginTop: "2%" }}>
-          {dateRange ? (
-  <PieChart chartData={userData2} />
-) : (
-  <PieChart chartData={userDataMois2} />
-)}
+          <div >
+          <h2 > Répartition des sexes  </h2>
+        </div>
+        <div className="chart-container" style={{ width: "50%" , marginLeft:"23%"}}>
+        <DonutChart malePercentage={malePercentage} femalePercentage={femalePercentage} />
+      </div>
+      <div className="dropdown" style={{marginLeft:"32%" , marginTop:"6%"}}>
+  <button className="btn btn-dropdown dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Année
+  </button>
+  <ul className="dropdown-menu">
+    <li><a className="dropdown-item" href="#">2022</a></li>
+    <li><a className="dropdown-item" href="#">2021</a></li>
+    <li><a className="dropdown-item" href="#"> 2020</a></li>
+    <li><a className="dropdown-item" href="#"> 2019</a></li>
+  </ul>
+</div>
 
           </div>
         </div>
@@ -163,56 +177,34 @@ function Statistic() {
 
         </div>
         <div>
-          <table className="table" style={{ width: "100%", marginTop: "5%" }}>
-            <caption className="visually-hidden">Boosted tables basic look</caption>
-            <thead>
-              <tr>
-                <th scope="col"></th>
-                <th scope="col">Année</th>
-                <th scope="col">Nombre de participants</th>
-                <th scope="col">Nombre de participants admis</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row"></th>
-                <td style={{ width: "25%" }}>2020</td>
-                <td>8.233</td>
-                <td>6.355</td>
-              </tr>
-              <tr>
-                <th scope="row"></th>
-                <td style={{ width: "25%" }}>2019</td>
-                <td>8.011</td>
-                <td>5.255</td>
-              </tr>
-              <tr>
-                <th scope="row"></th>
-                <td style={{ width: "25%" }}>2018</td>
-                <td>7.547</td>
-                <td>3.866</td>
-              </tr>
-              <tr>
-                <th scope="row"></th>
-                <td style={{ width: "25%" }}>2017</td>
-                <td>6.959</td>
-                <td>3.898</td>
-              </tr>
-              <tr>
-                <th scope="row"></th>
-                <td style={{ width: "25%" }}>2016</td>
-                <td>6.025</td>
-                <td>3.123</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+  <table className="table" style={{ width: "100%", marginTop: "5%" }}>
+    <caption className="visually-hidden">Boosted tables basic look</caption>
+    <thead>
+      <tr>
+        <th scope="col"></th>
+        <th scope="col">Année</th>
+        <th scope="col">Nombre de participants</th>
+        <th scope="col">Note moyenne</th>
+      </tr>
+    </thead>
+    <tbody>
+      {DataForTableStat.map((data, index) => (
+        <tr key={index}>
+          <th scope="row"></th>
+          <td style={{ width: "25%" }}>{data.year}</td>
+          <td>{data.participants}</td>
+          <td>{data.averageScore}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
+
         <div>
-          <h2> Répartition des sexes de l'année en cours </h2>
+          <h1> General statistic for ODC Training Programs</h1>
+          <img src={process.env.PUBLIC_URL + "/asset/statistic.png"} alt="statistic" style={{width:"40%" , marginLeft:"30%"}} />
         </div>
-        <div className="chart-container" style={{ width: "50%" , marginLeft:"23%"}}>
-        <DonutChart malePercentage={malePercentage} femalePercentage={femalePercentage} />
-      </div>
+        
       </div>
     </div>
   );

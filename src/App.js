@@ -4,16 +4,16 @@ import TrainingProgramForm from './Components/TrainingProgramForm';
 import TrainingCalendar from './Components/TrainingCalendar';
 import './App.css';
 import ManageAccount from './Components/ManageAccount';
-import BarChart from "./Components/BarChart";
-import LineChart from "./Components/LineChart";
-import PieChart from "./Components/PieChart";
 import Statistic from './Components/Statistic'
 import Layout from './Components/layout';
 import CreateAccount from "./Components/CreateAccount"
 import Login from './Components/Login';
 import ViewProfile from './Components/ViewProfile';
 import EditProfile from './Components/EditProfile';
-
+import TablePerProgram from './Components/StatisticsTables/StatisticPerProgram';
+import Programs from "./Components/StatisticsTables/Programs"
+import TablePerTrainer from './Components/StatisticsTables/StatisticTrainers';
+import Trainers from './Components/StatisticsTables/Trainers';
 function App() {
   return (
     <Router>
@@ -43,7 +43,8 @@ function AppContent() {
         <Route path="/TrainingCalendar" element={<TrainingCalendar />} />
         <Route path="/ViewProfile" element={<ViewProfile />} />
         <Route path="/EditProfile" element={<EditProfile />} />
-
+        <Route path="/TablePerProgram" element={<TablePerProgram Programs={Programs} />} />
+        <Route path="/TablePerTrainer" element={<TablePerTrainer Trainers={Trainers} />} />
       </Routes>
     </div>
   );
