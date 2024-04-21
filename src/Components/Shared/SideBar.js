@@ -23,7 +23,7 @@ function SideBar() {
 
 
 
-          <div className="dropdown" style={{ marginLeft: "1550px", marginTop: "18px" }}>
+          <div className="dropdown" style={{ marginLeft: "90%", marginTop: "1%" }}>
             <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
               <svg fill="currentColor" width="2em" height="2em" viewBox="0 0 1000 1000" aria-hidden="true" focusable="false">
                 <path d="M656.7 422.409a229.96 229.96 0 0 1-315.39.008A224.95 224.95 0 0 0 224.064 615H224v210a100 100 0 0 0 100 100h450V620a224.94 224.94 0 0 0-117.3-197.591M679 255A180 180 0 1 1 499 75a180 180 0 0 1 180 180" />

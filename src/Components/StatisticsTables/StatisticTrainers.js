@@ -12,9 +12,9 @@ const TablePerTrainer = ({ Trainers }) => {
     <div className="table-responsive" style={{ marginTop: "6%" , width:"50%"}}>
               <div className="btn-group" role="group" aria-label="Basic radio toggle button group" style={{ width: "80%" }}>
         <input type="radio" className="btn-check" name="btnradio" id="btnradio1" autoComplete="off" onClick={handleStatisticsClick} checked />
-        <label className="btn btn-toggle" htmlFor="btnradio1">Année</label>
+        <label className="btn btn-toggle" htmlFor="btnradio1">Statistic par program</label>
         <input type="radio" className="btn-check" name="btnradio" id="btnradio2" autoComplete="off"  checked />
-        <label className="btn btn-toggle" htmlFor="btnradio2">Mois</label>
+        <label className="btn btn-toggle" htmlFor="btnradio2">Statistic par Expert</label>
       </div>
       <table className="table table-hover" >
         <thead>

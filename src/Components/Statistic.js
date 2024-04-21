@@ -1,7 +1,6 @@
 import { useState } from "react";
 import BarChart from "./BarChart";
 import LineChart from "./LineChart";
-import PieChart from "./PieChart";
 import { UserData } from "./Data";
 import DonutChart from "./DonutChart";
 import { UserDataMois } from "./DataMois";
