@@ -95,20 +95,66 @@ function TrainingProgramForm() {
   const handleSubmit = async () => {
     let hasError = false;
 
-    // Validation code remains the same...
+    if (!Name) {
+      setNameError("Please enter a name");
+      hasError = true;
+    } else {
+      setNameError("");
+    }
+
+    if (!Start) {
+      setStartError("Please select a start date");
+      hasError = true;
+    } else if (new Date(Start) < new Date()) {
+      setStartError("Start date should be today or a future date");
+      hasError = true;
+    } else {
+      setStartError("");
+    }
+  
+    if (!Reminder) {
+      setReminderError("Please select a reminder date");
+      hasError = true;
+    } else if (new Date(Reminder) < new Date()) {
+      setReminderError("Reminder date should be today or a future date");
+      hasError = true;
+    } else {
+      setReminderError("");
+    }
+    if (selectedCoaches.length === 0) {
+      alert("Please select at least one coach.");
+      hasError = true;
+    }
 
     if (!hasError) {
       setIsSubmitting(true);
       try {
-        // Submit data to server...
-        // Reset form fields...
+        const response = await fetch('http://localhost:4000/CreateForm', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            name: Name,
+            startDate: Start,
+            reminderDate: Reminder,
+            coaches: selectedCoaches
+          }),
+        });
 
-        // Show spinner after successful submission for 3 seconds
-        setShowSpinner(true);
-        setTimeout(() => {
-          setShowSpinner(false);
-          window.location.href = "/TrainingCalendar"; // Navigate to TrainingCalendar
-        }, 1500);
+        if (response.ok) {
+          console.log('Form submitted successfully!');
+          Setname("");
+          Setstart("");
+          Setreminder("");
+          setSelectedCoaches([]);
+          setShowSpinner(true); // Show spinner after successful form submission
+          setTimeout(() => {
+            window.location.href = "/TrainingCalendar"; 
+          }, 3000);
+        } else {
+          console.error('Error submitting form:', response.statusText);
+        }
       } catch (error) {
         console.error('Error submitting form:', error);
       } finally {
@@ -128,56 +174,59 @@ function TrainingProgramForm() {
   };
 
   return (
-    <div className='FormBox'>
-      <div className='FormBorder'>
-        <h2 className='Title'>Training Program Creation</h2>
-        <form className='Forms'>
-          <div className={`form-group ${nameError && 'has-error'}`}>
-            <label>Name :</label>
-            <input type="text" className="form-control" value={Name} onChange={(e) => Setname(e.target.value)} required />
-            {nameError && <small className="text-danger">{nameError}</small>}
-          </div>
-          <div className={`form-group ${startError && 'has-error'}`}>
-            <label>Start Date :</label>
-            <input type="date" className="form-control" value={Start} onChange={(e) => Setstart(e.target.value)} required />
-            {startError && <small className="text-danger">{startError}</small>}
-          </div>
-          <div className={`form-group ${reminderError && 'has-error'}`}>
-            <label>End Date :</label>
-            <input type="date" className="form-control" value={Reminder} onChange={(e) => Setreminder(e.target.value)} required />
-            {reminderError && <small className="text-danger">{reminderError}</small>}
-          </div>
-          <label className='labelcoach'>Select Coaches:</label>
-          <CoachSelection selectedCoaches={selectedCoaches} setSelectedCoaches={setSelectedCoaches} />
-          <div className="d-grid gap-2 d-md-flex justify-content-md-end">
-            <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" id='clearbutton'>
-              Cancel
-            </button>
-            <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-              <div className="modal-dialog">
-                <div className="modal-content">
-                  <div className="modal-header">
-                    <h1 className="modal-title h5" id="exampleModalLabel">Are You Sure You Want To Cancel ? </h1>
-                    <button type="button" className="btn-close" data-bs-dismiss="modal" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Close"><span className="visually-hidden">Close</span></button>
-                  </div>
-                  <div className="modal-body">
-                  </div>
-                  <div className="modal-footer">
-                    <button type="button" className="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" className="btn btn-primary" onClick={handleSaveChanges}>Save changes</button>
+    <div>
+      <div className='FormBox'>
+        <div className='FormBorder'>
+          <h2 className='Title'>Training Program Creation</h2>
+          <form className='Forms'>
+            <div className={`form-group ${nameError && 'has-error'}`}>
+              <label>Name :</label>
+              <input type="text" className="form-control" value={Name} onChange={(e) => Setname(e.target.value)} required />
+              {nameError && <small className="text-danger">{nameError}</small>}
+            </div>
+            <div className={`form-group ${startError && 'has-error'}`}>
+              <label>Start Date :</label>
+              <input type="date" className="form-control" value={Start} onChange={(e) => Setstart(e.target.value)} required />
+              {startError && <small className="text-danger">{startError}</small>}
+            </div>
+            <div className={`form-group ${reminderError && 'has-error'}`}>
+              <label>End Date :</label>
+              <input type="date" className="form-control" value={Reminder} onChange={(e) => Setreminder(e.target.value)} required />
+              {reminderError && <small className="text-danger">{reminderError}</small>}
+            </div>
+            <label className='labelcoach' id='coachselect'>Select Coaches:</label>
+            <CoachSelection selectedCoaches={selectedCoaches} setSelectedCoaches={setSelectedCoaches} />
+            <div className="d-grid gap-2 d-md-flex justify-content-md-end">
+              <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" id='clearbutton'>
+                Cancel
+              </button>
+              <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div className="modal-dialog">
+                  <div className="modal-content">
+                    <div className="modal-header">
+                      <h1 className="modal-title h5" id="exampleModalLabel">Are You Sure You Want To Cancel ? </h1>
+                      <button type="button" className="btn-close" data-bs-dismiss="modal" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Close"><span className="visually-hidden">Close</span></button>
+                    </div>
+                    <div className="modal-body">
+                    </div>
+                    <div className="modal-footer">
+                      <button type="button" className="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="button" className="btn btn-primary" onClick={handleSaveChanges}>Save changes</button>
+                    </div>
                   </div>
                 </div>
               </div>
+              {showSpinner && (
+                <div className="spinner-border" role="status">
+                  <span className="visually-hidden">Loading...</span>
+                </div>
+              )}
+              {!showSpinner && (
+                <button type="button" className="btn btn-success" onClick={handleSubmit}>Confirm</button>
+              )}
             </div>
-            {showSpinner ? (
-              <div className="spinner-border" role="status">
-                <span className="visually-hidden">Loading...</span>
-              </div>
-            ) : (
-              <button type="button" className="btn btn-success" onClick={handleSubmit}>Confirm</button>
-            )}
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
     </div>
   );
