@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import 'boosted/dist/css/boosted.min.css';
 import "./Form.css";
+import { useNavigate } from 'react-router-dom';
 
 function CoachSelection({ selectedCoaches, setSelectedCoaches }) {
   const handleCoachSelect = (coach) => {
@@ -52,6 +53,7 @@ function CoachSelection({ selectedCoaches, setSelectedCoaches }) {
                 className="dropdown-item"
                 href="#"
                 onClick={() => handleCoachSelect("Asma")}
+                id='asma'
               >
                 Asma
               </a>
@@ -61,6 +63,8 @@ function CoachSelection({ selectedCoaches, setSelectedCoaches }) {
                 className="dropdown-item"
                 href="#"
                 onClick={() => handleCoachSelect("Mounib")}
+                id='mounib'
+
               >
                 Mounib
               </a>
@@ -70,6 +74,8 @@ function CoachSelection({ selectedCoaches, setSelectedCoaches }) {
                 className="dropdown-item"
                 href="#"
                 onClick={() => handleCoachSelect("Malik")}
+                id='malik'
+
               >
                 Malik
               </a>
@@ -91,6 +97,7 @@ function TrainingProgramForm() {
   const [reminderError, setReminderError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSpinner, setShowSpinner] = useState(false);
+  const navigate = useNavigate();
 
   const handleSubmit = async () => {
     let hasError = false;
@@ -149,17 +156,16 @@ function TrainingProgramForm() {
           setSelectedCoaches([]);
           setShowSpinner(true);
           setTimeout(() => {
-            window.location.href = "/TrainingCalendar";
-          }, 3000);
+            navigate('/TrainingCalendar');
+              document.title = 'Current Calendar';
+            }, 1500);
         } else {
           console.error('Error submitting form:', response.statusText);
         }
       } catch (error) {
         console.error('Error submitting form:', error);
       } finally {
-        setTimeout(() => {
-          setIsSubmitting(false);
-        }, 1500);
+        console.log("Done !\n")
       }
     }
   };
@@ -180,17 +186,17 @@ function TrainingProgramForm() {
           <form className='Forms'>
             <div className={`form-group ${nameError && 'has-error'}`}>
               <label>Name :</label>
-              <input type="text" className="form-control" value={Name} onChange={(e) => Setname(e.target.value)} required />
+              <input type="text" className="form-control" value={Name} id='name' onChange={(e) => Setname(e.target.value)} required />
               {nameError && <small className="text-danger">{nameError}</small>}
             </div>
             <div className={`form-group ${startError && 'has-error'}`}>
               <label>Start Date :</label>
-              <input type="date" className="form-control" value={Start} onChange={(e) => Setstart(e.target.value)} required />
+              <input type="date" className="form-control" id='startDate' value={Start} onChange={(e) => Setstart(e.target.value)} required />
               {startError && <small className="text-danger">{startError}</small>}
             </div>
             <div className={`form-group ${reminderError && 'has-error'}`}>
               <label>End Date :</label>
-              <input type="date" className="form-control" value={Reminder} onChange={(e) => Setreminder(e.target.value)} required />
+              <input type="date" className="form-control" value={Reminder} id='reminderDate' onChange={(e) => Setreminder(e.target.value)} required />
               {reminderError && <small className="text-danger">{reminderError}</small>}
             </div>
             <label className='labelcoach' id='coachselect'>Select Coaches:</label>
@@ -221,7 +227,7 @@ function TrainingProgramForm() {
                 </div>
               )}
               {!showSpinner && (
-                <button type="button" className="btn btn-success" onClick={handleSubmit}>Confirm</button>
+                <button type="button" className="btn btn-success" id='confirmbutton' onClick={handleSubmit}>Confirm</button>
               )}
             </div>
           </form>

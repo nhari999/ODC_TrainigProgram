@@ -1,10 +1,14 @@
-import './Login.css';
-import 'boosted/dist/css/boosted.min.css';
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import './Login.css'; // Import custom styles
+import 'boosted/dist/css/boosted.min.css'; // Import Bootstrap styles
+
 
 function Login() {
+  const navigate = useNavigate();
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
+  const [loginStatus, setLoginStatus] = useState(null);
 
   async function handleLogin(event) {
     event.preventDefault();
@@ -23,35 +27,53 @@ function Login() {
       console.log(data);
       if (data.status === "ok") {
         localStorage.setItem('token', data.User);
-        alert('Login successful');
-        // window.location.href = '/dashboard'
+        setLoginStatus('success');
+        setTimeout(() => {
+          navigate('/Statistic');
+          document.title = 'Welcome To OTM Orange';
+        }, 1000);
       } else {
-        alert('Please check your username and password');
+        setLoginStatus('error');
       }
     } catch (error) {
       console.error('Error:', error);
-      alert('An error occurred. Please try again later.');
+      setLoginStatus('error');
     }
   }
-  
-  
 
   return (
-    <div className="LoginContainer">
-      <div className="mb-3 row">
-        <label id='labelemail' className="col-sm-2 col-form-label">Email</label>
-        <div className="col-sm-10">
-          <input type="email" className="form-control" value={Email} onChange={(e) => setEmail(e.target.value)} id="inputEmail" />
+   
+    <div className="login-container" >
+      <div className="login-box">
+        <div className="logo-container">
+        <img src="./asset/orange.png" alt="Logo" className='logo'/>
         </div>
-      </div>
-      <div className="mb-3 row">
-        <label id='labelpassword' className="col-sm-2 col-form-label">Password</label>
-        <div className="col-sm-10">
-          <input type="password" className="form-control" value={Password} onChange={(e) => setPassword(e.target.value)} id="inputPassword" />
-        </div>
-        <button className="btn btn-primary" type="button" onClick={handleLogin}>Login</button>
+        {loginStatus === 'success' && (
+          <div className="alert alert-success" role="alert">
+            <span className="alert-icon"><span className="visually-hidden">Success</span></span>
+            <p>Log In Successfull Welcome</p>
+          </div>
+        )}
+        {loginStatus === 'error' && (
+          <div className="alert alert-danger" role="alert">
+            <span className="alert-icon"><span className="visually-hidden">Error</span></span>
+            <p>Error Occured While Trying To Log In</p>
+          </div>
+        )}
+        <form onSubmit={handleLogin}>
+          <div className="form-group">
+            <label htmlFor="inputEmail">Email :</label>
+            <input type="email" className="form-control input-box" value={Email} onChange={(e) => setEmail(e.target.value)} id="inputEmail" required/>
+          </div>
+          <div className="form-group">
+            <label htmlFor="inputPassword">Password :</label>
+            <input type="password" className="form-control input-box" value={Password} onChange={(e) => setPassword(e.target.value)} id="inputPassword" required/>
+          </div>
+          <button type="button" className="btn btn-primary"onClick={handleLogin}>Login</button>
+        </form>
       </div>
     </div>
+    
   );
 }
 

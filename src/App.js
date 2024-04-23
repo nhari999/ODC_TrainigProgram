@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import TrainingProgramForm from './Components/TrainingProgramForm';
 import TrainingCalendar from './Components/TrainingCalendar';
 import './App.css';
+import { useEffect } from 'react';
 import ManageAccount from './Components/ManageAccount';
 import BarChart from "./Components/BarChart";
 import LineChart from "./Components/LineChart";
@@ -15,6 +16,9 @@ import ModifyForm from "./Components/ModifyForm";
 
 
 function App() {
+  useEffect(() => {
+    document.title = "Orange ODC";
+  }, []);
   return (
     <div className="App">
       <Router>
@@ -25,7 +29,7 @@ function App() {
           <Route path="/ManageAccount" element={<ManageAccount />} />
           <Route path="/Statistic" element={<Statistic />} />
           <Route path="/CreateAccount" element={<CreateAccount />} />
-          <Route path="/Login" element={<Login />} />
+          <Route path="/" element={<Login />} />
           <Route path="/modifyForm" element={<ModifyForm />} />
         </Routes>
 

@@ -58,9 +58,7 @@ app.post('/CreateForm', async (req, res) => {
 });
   app.get('/GetFormData', async (req, res) => {
     try {
-        // Retrieve all form data from the database
         const formData = await FormModel.find();
-        // Send the retrieved form data as a response
         res.status(200).json(formData);
     } catch (error) {
         console.error("Error fetching form data:", error);
