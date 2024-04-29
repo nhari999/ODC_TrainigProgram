@@ -4,14 +4,14 @@ import 'react-big-calendar/lib/css/react-big-calendar.css';
 import dayjs from 'dayjs';
 import '../calendarStyle.css';
 import Description from './Description';
-import { NavLink } from 'react-router-dom'; 
+import { NavLink } from 'react-router-dom';
 import axios from 'axios'; // Import axios for making HTTP requests
 
 function TrainingCalendar() {
     const [selectedEventDescription, setSelectedEventDescription] = useState(null);
-    const [showBox, setShowBox] = useState(false); 
+    const [showBox, setShowBox] = useState(false);
     const [events, setEvents] = useState([]); // State to hold events data
-
+    const [SessionEvents, setSessionEvents] = useState([]);
     const localizer = dayjsLocalizer(dayjs);
 
     const handleCloseDescription = () => {
@@ -22,19 +22,20 @@ function TrainingCalendar() {
         event: props => {
             return (
                 <div
-                    style={{ whiteSpace: 'normal'}}
+                    style={{ whiteSpace: 'normal' }}
                     onClick={() => {
                         setSelectedEventDescription(props.event);
                         setShowBox(true);
                     }}
                 >
-                    <div style={{fontWeight:'bold',margin:'3px'}}>{props.event.title}</div>
+                    <div style={{ fontWeight: 'bold', margin: '3px' }}>{props.event.title}</div>
                 </div>
             );
         }
     };
+
     useEffect(() => {
-        // Fetch events data from the API endpoint
+        // Fetch events data from the first API endpoint
         const fetchEvents = async () => {
             try {
                 const response = await axios.get('http://localhost:4000/GetFormData');
@@ -52,6 +53,27 @@ function TrainingCalendar() {
         };
 
         fetchEvents(); // Call the fetchEvents function when the component mounts
+
+        // Fetch additional events data from the second API endpoint
+        const fetchAdditionalEvents = async () => {
+            try {
+                // Replace this URL with your second API endpoint URL
+                const response = await axios.get('http://localhost:4000/GetSessionData');
+                // Example: const response = await axios.get('http://localhost:4000/GetAdditionalEvents');
+                const additionalEventData = response.data.map(event => ({
+                    title:event.Name,
+                    start: new Date(event.startDate),
+                    end: new Date(event.startDate), // Convert startDate to Date object
+                    selectedEvent : event.selectedEvent
+                }));
+                // Merge additional events with existing events
+                setSessionEvents(additionalEventData);
+            } catch (error) {
+                console.error('Error fetching additional events data:', error);
+            }
+        };
+
+        fetchAdditionalEvents(); // Call the fetchAdditionalEvents function when the component mounts
     }, []); // Empty dependency array ensures useEffect runs only once after initial render
 
     return (
@@ -60,19 +82,31 @@ function TrainingCalendar() {
             width: "70vw",
             paddingTop: '90px',
             paddingBottom: '20px',
-            position: 'relative', 
+            position: 'relative',
         }}>
 
             <NavLink to="/TrainingProgramForm">
-                <button 
-                    className="addButton" 
-                    onClick={() => setShowBox(true)} 
+                <button
+                    className="addButton"
+                    onClick={() => setShowBox(true)}
                 >
                     +
                 </button>
             </NavLink>
-
-            
+            <h1 className="textButton1">Add Session</h1>
+           
+            <NavLink to="/AddSession">  
+                <button
+                    className="addButton1"
+                    onClick={() => setShowBox(true)}
+                    style={{ marginTop: '10px' }} // Adjust the margin top to create space between buttons
+                >
+                    +
+                </button>
+               
+            </NavLink>
+            <h1  className="textButton">Add Training</h1>
+           
             {showBox && (
                 <div style={{
                     position: 'fixed',
@@ -80,14 +114,15 @@ function TrainingCalendar() {
                     left: 0,
                     width: '100%',
                     height: '100%',
-                    backdropFilter: 'blur(8px)', 
-                    zIndex: 9998, 
+                    backdropFilter: 'blur(8px)',
+                    zIndex: 9998,
                 }}></div>
             )}
 
             <Calendar
                 localizer={localizer}
-                events={events} // Pass events data to the Calendar component
+                events={events.concat(SessionEvents)} // Pass events data to the Calendar component
+                components={components} // Pass custom event component
                 onSelectEvent={event => {
                     setSelectedEventDescription(event);
                     setShowBox(true);
@@ -102,5 +137,3 @@ function TrainingCalendar() {
 }
 
 export default TrainingCalendar;
-
-

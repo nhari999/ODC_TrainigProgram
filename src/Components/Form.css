@@ -103,3 +103,15 @@
     border-color: red;
     font-weight: bold;
 }
+.event-dropdown {
+    margin-bottom: 20px;
+}
+
+.event-dropdown label {
+    margin-right: 20px;
+}
+
+.event-dropdown select {
+    width: 50%;
+    height: 40px;
+}

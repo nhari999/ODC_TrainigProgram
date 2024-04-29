@@ -13,6 +13,7 @@ import Layout from './Components/layout';
 import Login from './Components/Login';
 import CreateAccount from "./Components/CreateAccount"
 import ModifyForm from "./Components/ModifyForm";
+import AddSession from './Components/AddSession';
 
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
           <Route path="/Statistic" element={<Statistic />} />
           <Route path="/CreateAccount" element={<CreateAccount />} />
           <Route path="/" element={<Login />} />
+          <Route path="/AddSession" element={<AddSession />} />
           <Route path="/modifyForm" element={<ModifyForm />} />
         </Routes>
 

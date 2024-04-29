@@ -2,6 +2,7 @@ const express = require('express')
 const app =express()
 const Model = require("./Model/User")
 const FormModel = require('./Model/Form');
+const SessionFormModel = require('./Model/Session');
 const cors = require('cors');
 const jwt = require('jsonwebtoken');
 app.use(cors());
@@ -56,9 +57,36 @@ app.post('/CreateForm', async (req, res) => {
         res.status(500).json({ error: "Internal server error" });
     }
 });
+app.post('/CreateSession', async (req, res) => {
+    try {
+        const { Name,startDate,selectedEvent } = req.body;
+       
+        const newSessionForm = new SessionFormModel({
+            Name,
+            startDate,
+            selectedEvent
+        });
+
+        await newSessionForm.save();
+
+        res.status(201).json({ message: "Form data inserted successfully", form: newSessionForm });
+    } catch (error) {
+        console.error("Error inserting form data:", error);
+        res.status(500).json({ error: "Internal server error" });
+    }
+});
   app.get('/GetFormData', async (req, res) => {
     try {
         const formData = await FormModel.find();
+        res.status(200).json(formData);
+    } catch (error) {
+        console.error("Error fetching form data:", error);
+        res.status(500).json({ error: "Internal server error" });
+    }
+});
+app.get('/GetSessionData', async (req, res) => {
+    try {
+        const formData = await SessionFormModel.find();
         res.status(200).json(formData);
     } catch (error) {
         console.error("Error fetching form data:", error);

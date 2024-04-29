@@ -68,6 +68,44 @@
     height: 100px;
     width: 100px;
 }
+.addButton1 {
+  position: fixed;
+  top: 50%;
+  right: 90%;
+  transform: translateY(-50%);
+  z-index: 9;
+  padding: 10px;
+  border-radius: 50%;
+  font-size: 50px;
+  text-align: center;
+  background-color: #ff7900;
+  color: white;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  height: 100px;
+  width: 100px;
+}
+.addButton1:hover{
+  background-color: black;
+}
 .addButton:hover{
   background-color: black;
+}
+
+.textButton1{
+  position: fixed;
+  top: 60%;
+  right: 87%;
+
+  z-index: 10;
+
+}
+.textButton{
+  position: fixed;
+  top: 60%;
+  right: 2%;
+
+  z-index: 10;
+
 }
