@@ -3,6 +3,7 @@ import 'boosted/dist/css/boosted.min.css';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+
 function Login() {
   const navigate = useNavigate(); // Use useNavigate hook to get the navigate function
   const [Email, setEmail] = useState("");
@@ -44,6 +45,7 @@ function Login() {
         <div className="alert alert-success" role="alert">
           <span className="alert-icon"><span className="visually-hidden">Success</span></span>
           <p>Log In Successfull Welcome</p>
+    
         </div>
       )}
       {loginStatus === 'error' && (

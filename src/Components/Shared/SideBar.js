@@ -30,7 +30,7 @@ function SideBar() {
               </svg>
             </button>
             <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <li><a className="dropdown-item" href="#">View Profile</a></li>
+              <li>     <NavLink to="/ViewProfile" className="dropdown-item">View Profile</NavLink></li>
               <li><a className="dropdown-item" href="#">Log Out</a></li>
             </ul>
           </div>

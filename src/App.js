@@ -17,7 +17,10 @@ import Trainers from './Components/StatisticsTables/Trainers';
 function App() {
   return (
     <Router>
+      <div className="App scrollable" style={{overflowY: "scroll" }} >
+      <Layout />
       <AppContent />
+      </div>
     </Router>
   );
 }
@@ -31,8 +34,8 @@ function AppContent() {
 
   // Render the Layout component conditionally based on the current location
   return (
-    <div className="App">
-      { !isLoginPage && <Layout /> }
+    <div className="App" >
+      {!isLoginPage ? 'content-wrapper' : ''}
       <Routes>
         <Route path="/TrainingProgramForm" element={<TrainingProgramForm />} />
         <Route path="/TrainingCalendar" element={<TrainingCalendar />} />
