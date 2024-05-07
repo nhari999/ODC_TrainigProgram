@@ -23,6 +23,10 @@ const participantSchema = new mongoose.Schema({
   date_of_enrollment: {
     type: Date,
     required: true
+  },
+  note: {
+    type: Number,
+    default: null
   }
 });
 

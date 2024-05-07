@@ -14,7 +14,8 @@ const coordinatorsSchema = new mongoose.Schema({
   phoneNumber: {
     type: String,
     required: true
-  }
+  },
+  
 });
 
 // Create a Mongoose model for the coordinator collection

@@ -2,11 +2,9 @@ import { useState , useEffect} from "react";
 import BarChart from "./BarChart";
 import LineChart from "./LineChart";
 import DonutChart from "./DonutChart";
-import { UserDataMois } from "./DataMois";
-import { UserDataForAge }  from "./DataForAge";
-import DataForTableStat from "./DataForTableStat"
 import axios from "axios";
 import { NavLink } from "react-router-dom";
+
 
 
 function Statistic() {

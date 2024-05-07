@@ -14,12 +14,12 @@ import TablePerProgram from './Components/StatisticsTables/StatisticPerProgram';
 import Programs from "./Components/StatisticsTables/Programs"
 import TablePerTrainer from './Components/StatisticsTables/StatisticTrainers';
 import Trainers from './Components/StatisticsTables/Trainers';
+
 function App() {
   return (
     <Router>
       <div className="App scrollable" style={{overflowY: "scroll" }} >
-      <Layout />
-      <AppContent />
+        <AppContent />
       </div>
     </Router>
   );
@@ -33,9 +33,11 @@ function AppContent() {
   const isLoginPage = location.pathname === '/';
 
   // Render the Layout component conditionally based on the current location
+  const layoutComponent = !isLoginPage ? <Layout /> : null;
+
   return (
-    <div className="App" >
-      {!isLoginPage ? 'content-wrapper' : ''}
+    <div className="App">
+      {layoutComponent}
       <Routes>
         <Route path="/TrainingProgramForm" element={<TrainingProgramForm />} />
         <Route path="/TrainingCalendar" element={<TrainingCalendar />} />
