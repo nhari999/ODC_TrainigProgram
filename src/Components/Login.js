@@ -50,7 +50,7 @@ function Login() {
         {loginStatus === 'success' && (
           <div className="alert alert-success" role="alert">
             <span className="alert-icon"><span className="visually-hidden">Success</span></span>
-            <p>Log In Successfull Welcomee</p>
+            <p>Log In Successfull Welcomee </p>
           </div>
         )}
         {loginStatus === 'error' && (
