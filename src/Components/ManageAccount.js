@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import 'boosted/dist/css/boosted.min.css';
+
 import axios from 'axios'; // Import Axios
 import { NavLink } from 'react-router-dom';
 
@@ -22,6 +23,7 @@ function ManageAccount() {
     }
   };
 
+
   const deleteCoordinator = async (id) => {
     try {
       const response = await axios.delete(`http://localhost:4000/deleteCoordinator/${id}`);
@@ -40,6 +42,7 @@ function ManageAccount() {
         <h6 style={{ marginTop: "10%", fontSize: '4rem' }}>Manage Accounts</h6>
         <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "3%" }}>
 
+
           <button onClick={() => window.location.href = "/CreateAccount"} type="button" className="btn btn-primary btn-lg" style={{ display: "flex", justifyContent: "center", borderRadius: "4%", height: "70%", width: "16%" }}>
             <img src={process.env.PUBLIC_URL + "/asset/add.png"} alt="Orange" style={{ width: "6%" }} />
             <text style={{ fontSize: "120%", color: "white" }} > Add</text>
@@ -53,6 +56,7 @@ function ManageAccount() {
       </div>
       <div className="table-responsive" style={{ width: "100%" }}>
         <table className="table table-sm table-hover has-checkbox" >
+
 
           <thead>
             <tr>
@@ -70,6 +74,7 @@ function ManageAccount() {
             </tr>
           </thead>
           <tbody>
+
           {coordinators.map((coordinator) => (
   <tr key={coordinator._id}>
     <td>
@@ -90,6 +95,7 @@ function ManageAccount() {
 ))}
 
 </tbody>
+
 
         </table>
       </div>
