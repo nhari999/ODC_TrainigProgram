@@ -1,10 +1,11 @@
-import './Login.css';
-import 'boosted/dist/css/boosted.min.css';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import './Login.css'; // Import custom styles
+import 'boosted/dist/css/boosted.min.css'; // Import Bootstrap styles
+
 
 function Login() {
-  const navigate = useNavigate(); // Use useNavigate hook to get the navigate function
+  const navigate = useNavigate();
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
   const [loginStatus, setLoginStatus] = useState(null);
@@ -29,7 +30,8 @@ function Login() {
         setLoginStatus('success');
         setTimeout(() => {
           navigate('/Statistic');
-        }, 1000);      } else {
+        }, 1000);
+      } else {
         setLoginStatus('error');
       }
     } catch (error) {
@@ -39,39 +41,39 @@ function Login() {
   }
 
   return (
-    <div className="LoginContainer">
-      {loginStatus === 'success' && (
-        <div className="alert alert-success" role="alert">
-          <span className="alert-icon"><span className="visually-hidden">Success</span></span>
-          <p>Log In Successfull Welcome</p>
+   
+    <div className="login-container" >
+      <div className="login-box">
+        <div className="logo-container">
+        <img src="./asset/orange.png" alt="Logo" className='logo'/>
         </div>
-      )}
-      {loginStatus === 'error' && (
-        <div className="alert alert-danger" role="alert">
-          <span className="alert-icon"><span className="visually-hidden">Error</span></span>
-          <p>Error Occured While Trying To Log In</p>
-        </div>
-      )}
-      <div className="mb-3 row">
-        <div className="col-sm-12">
-          <label id='labelemail' className="col-form-label">Email :</label>
-          <input type="email" className="form-control input-box" value={Email} onChange={(e) => setEmail(e.target.value)} id="inputEmail" required/>
-        </div>
-      </div>
-      <div className="mb-3 row">
-        <div className="col-sm-12">
-          <label id='labelpassword' className="col-form-label">Password :</label>
-          <input type="password" className="form-control input-box" value={Password} onChange={(e) => setPassword(e.target.value)} id="inputPassword" required/>
-        </div>
-      </div>
-      <div className="mb-3 row">
-        <div className="col-sm-12">
-          <button className="btn btn-primary" type="button" onClick={handleLogin}>Login</button>
-        </div>
+        {loginStatus === 'success' && (
+          <div className="alert alert-success" role="alert">
+            <span className="alert-icon"><span className="visually-hidden">Success</span></span>
+            <p>Log In Successfull Welcome</p>
+          </div>
+        )}
+        {loginStatus === 'error' && (
+          <div className="alert alert-danger" role="alert">
+            <span className="alert-icon"><span className="visually-hidden">Error</span></span>
+            <p>Error Occured While Trying To Log In</p>
+          </div>
+        )}
+        <form onSubmit={handleLogin}>
+          <div className="form-group">
+            <label htmlFor="inputEmail">Email :</label>
+            <input type="email" className="form-control input-box" value={Email} onChange={(e) => setEmail(e.target.value)} id="inputEmail" required/>
+          </div>
+          <div className="form-group">
+            <label htmlFor="inputPassword">Password :</label>
+            <input type="password" className="form-control input-box" value={Password} onChange={(e) => setPassword(e.target.value)} id="inputPassword" required/>
+          </div>
+          <button type="button" className="btn btn-primary"onClick={handleLogin}>Login</button>
+        </form>
       </div>
     </div>
+    
   );
-  
 }
 
 export default Login;

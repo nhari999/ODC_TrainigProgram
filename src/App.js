@@ -14,6 +14,7 @@ import TablePerProgram from './Components/StatisticsTables/StatisticPerProgram';
 import Programs from "./Components/StatisticsTables/Programs"
 import TablePerTrainer from './Components/StatisticsTables/StatisticTrainers';
 import Trainers from './Components/StatisticsTables/Trainers';
+import CertificateGenerator from './Components/certif/CertificateGenerator';
 function App() {
   return (
     <Router>
@@ -45,6 +46,7 @@ function AppContent() {
         <Route path="/EditProfile" element={<EditProfile />} />
         <Route path="/TablePerProgram" element={<TablePerProgram Programs={Programs} />} />
         <Route path="/TablePerTrainer" element={<TablePerTrainer Trainers={Trainers} />} />
+        <Route path="/CertificateGenerator" element={<CertificateGenerator/>} />
       </Routes>
     </div>
   );
