@@ -3,9 +3,11 @@ import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-route
 import TrainingProgramForm from './Components/TrainingProgramForm';
 import TrainingCalendar from './Components/TrainingCalendar';
 import './App.css';
+import { useEffect } from 'react';
 import ManageAccount from './Components/ManageAccount';
 import Statistic from './Components/Statistic'
 import Layout from './Components/layout';
+
 import CreateAccount from "./Components/CreateAccount"
 import Login from './Components/Login';
 import ViewProfile from './Components/ViewProfile';
@@ -15,10 +17,20 @@ import Programs from "./Components/StatisticsTables/Programs"
 import TablePerTrainer from './Components/StatisticsTables/StatisticTrainers';
 import Trainers from './Components/StatisticsTables/Trainers';
 import CertificateGenerator from './Components/certif/CertificateGenerator';
+
+import AddSession from './Components/AddSession';
+
+
+
 function App() {
+  useEffect(() => {
+    document.title = "Orange ODC";
+  }, []);
   return (
     <Router>
-      <AppContent />
+      <div className="App scrollable" style={{overflowY: "scroll" }} >
+        <AppContent />
+      </div>
     </Router>
   );
 }
@@ -31,9 +43,12 @@ function AppContent() {
   const isLoginPage = location.pathname === '/';
 
   // Render the Layout component conditionally based on the current location
+  const layoutComponent = !isLoginPage ? <Layout /> : null;
+
   return (
     <div className="App">
-      { !isLoginPage && <Layout /> }
+
+      {layoutComponent}
       <Routes>
         <Route path="/TrainingProgramForm" element={<TrainingProgramForm />} />
         <Route path="/TrainingCalendar" element={<TrainingCalendar />} />
@@ -47,7 +62,16 @@ function AppContent() {
         <Route path="/TablePerProgram" element={<TablePerProgram Programs={Programs} />} />
         <Route path="/TablePerTrainer" element={<TablePerTrainer Trainers={Trainers} />} />
         <Route path="/CertificateGenerator" element={<CertificateGenerator/>} />
+   <Route path="/AddSession" element={<AddSession />} />
       </Routes>
+
+          
+         
+
+   
+
+  
+
     </div>
   );
 }

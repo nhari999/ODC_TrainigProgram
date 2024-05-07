@@ -1,86 +1,74 @@
 export const UserDataMois = [
     {
       id: 1,
-      year: "janvier",
+      mois: "janvier",
       userGain: 8000,
-      userLost: 823,
-      percentage: 20
+
     },
     {
       id: 2,
-      year: "fevrier",
+      mois: "fevrier",
       userGain: 4677,
-      userLost: 345,
-      percentage : 9
+
     },
     {
       id: 3,
-      year: "mars",
+      mois: "mars",
       userGain: 7888,
-      userLost: 555,
-      percentage: 2
+
     },
     {
       id: 4,
-      year: "avril",
+      mois: "avril",
       userGain: 9000,
-      userLost: 4555,
-      percentage: 25
+
     },
     {
         id: 5,
-        year: "Mai",
+        mois: "Mai",
         userGain: 4300,
-        userLost: 234,
-        percentage: 14
+
       },
     {
       id: 6,
-      year: "juin",
+      mois: "juin",
       userGain: 4300,
-      userLost: 234,
-      percentage: 3
+
     },
     {
       id: 7,
-      year: "juillet",
+      mois: "juillet",
       userGain: 4300,
-      userLost: 234,
-      percentage: 8
+
     },
     {
       id: 8,
-      year: "aout",
+      mois: "aout",
       userGain: 4300,
-      userLost: 234,
-      percentage: 28
+
     },
     {
       id: 9,
-      year: "septembre",
+      mois: "septembre",
       userGain: 4300,
-      userLost: 234,
-      percentage: 17
+
     },
     {
       id: 10,
-      year: "octobre",
+      mois: "octobre",
       userGain: 4300,
-      userLost: 234,
-      percentage: 9
+
     },
     {
       id: 11,
-      year: "novombre",
+      mois: "novombre",
       userGain: 4300,
-      userLost: 234,
-      percentage: 0
+
     },
     {
         id: 1,
-        year: "decembre",
+        mois: "decembre",
         userGain: 4300,
-        userLost: 234,
-        percentage: 40
+
       },
   ];
