@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import  { useRef } from 'react';
+import React, { useState, useRef } from 'react';
+import axios from 'axios';
 import emailjs from '@emailjs/browser';
 
 function CreateAccount() {
@@ -16,44 +16,47 @@ function CreateAccount() {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Form submission logic here
-    console.log(formData);
-    // Reset form fields after submission
-    setFormData({
-      fullName: '',
-      phoneNumber: '',
-      email: '',
-      password: '',
-      role: '',
-    });
+    try {
+      await axios.post('http://localhost:4000/createCoordinator', formData);
+      console.log('Coordinator created successfully');
+      sendEmail(e); // Call sendEmail function after successful form submission
+      // Reset form fields after successful submission
+      setFormData({
+        fullName: '',
+        phoneNumber: '',
+        email: '',
+        password: '',
+        role: '',
+      });
+    } catch (error) {
+      console.error('Error creating coordinator:', error);
+    }
   };
 
   const form = useRef();
 
   const sendEmail = (e) => {
     e.preventDefault();
-
     emailjs
       .sendForm('service_7idk6gs', 'template_v7s5x6t', form.current, {
         publicKey: 'HdGNxqJw6cPK0hlNk',
       })
       .then(
         () => {
-          console.log('SUCCESS!');
+          console.log('Email sent successfully!');
         },
         (error) => {
-          console.log('FAILED...', error.text);
+          console.log('Email sending failed:', error.text);
         },
       );
   };
 
-
   return (
     <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", height: "100vh" }}>
       <h2>Create Account</h2>
-      <form  ref={form} onSubmit={sendEmail}  style={{ width: "140%", height:"60%", padding: "20px", border: "1px solid #ccc", borderRadius: "8px", backgroundColor: "#f9f9f9" }}>
+      <form ref={form} onSubmit={handleSubmit} style={{ width: "140%", height:"60%", padding: "20px", border: "1px solid #ccc", borderRadius: "8px", backgroundColor: "#f9f9f9" }}>
         <div style={{ marginBottom: "2%" }}>
           <label htmlFor="fullName">Full Name:</label>
           <input

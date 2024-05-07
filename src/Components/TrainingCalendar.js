@@ -5,7 +5,10 @@ import dayjs from 'dayjs';
 import '../calendarStyle.css';
 import Description from './Description';
 import { NavLink } from 'react-router-dom';
+
+
 import axios from 'axios'; // Import axios for making HTTP requests
+
 
 function TrainingCalendar() {
     const [selectedEventDescription, setSelectedEventDescription] = useState(null);

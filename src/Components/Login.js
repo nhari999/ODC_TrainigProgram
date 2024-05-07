@@ -1,11 +1,17 @@
+
+import './Login.css';
+import 'boosted/dist/css/boosted.min.css';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Login.css'; // Import custom styles
-import 'boosted/dist/css/boosted.min.css'; // Import Bootstrap styles
+
+
+
 
 
 function Login() {
   const navigate = useNavigate();
+
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
   const [loginStatus, setLoginStatus] = useState(null);
@@ -30,9 +36,12 @@ function Login() {
         setLoginStatus('success');
         setTimeout(() => {
           navigate('/Statistic');
+
+
           document.title = 'Welcome To OTM Orange';
         }, 1000);
       } else {
+
         setLoginStatus('error');
       }
     } catch (error) {
@@ -42,6 +51,7 @@ function Login() {
   }
 
   return (
+
    
     <div className="login-container" >
       <div className="login-box">
@@ -75,6 +85,7 @@ function Login() {
     </div>
     
   );
+
 }
 
 export default Login;
