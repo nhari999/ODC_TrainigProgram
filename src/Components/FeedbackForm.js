@@ -38,11 +38,11 @@ function FeedbackForm() {
     };
 
     const questions = [
-        "How do you rate the user interface?",
-        "What do you think about the website's performance?",
-        "How likely are you to recommend our service to others?",
-        "What is your overall satisfaction with our product?",
-        "How responsive is our customer support?"
+        "How Much are you satisfied from the Orange Training Program ?",
+        "Rate the ressources efficiency ? ",
+        "How efficient was the trainer ?",
+        "What is your overall satisfaction ?",
+        "How responsive is our Staff support?"
     ];
 
     return (
