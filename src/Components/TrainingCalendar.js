@@ -86,10 +86,11 @@ function TrainingCalendar() {
             paddingTop: '90px',
             paddingBottom: '20px',
             position: 'relative',
+            marginLeft:"15%"
         }}>
 
             <NavLink to="/TrainingProgramForm">
-                <button
+                <button 
                     className="addButton"
                     onClick={() => setShowBox(true)}
                 >

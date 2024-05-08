@@ -8,15 +8,20 @@ const Coordinator = require('./Models/coordinators');
 const Participant = require("./Models/participants") 
 const TrainerStatistic = require("./Models/trainersStatistic")
 const ProgramStatistic = require("./Models/programsStatistic")
-
+const SessionFormModel = require('./Models/Session');
+const jwt = require('jsonwebtoken');
 app.use(cors());
 app.use(express.json());
+const blacklist = new Set();
+const moment = require('moment');
 const mongoose = require("mongoose");
+
+
 mongoose.connect("mongodb://127.0.0.1:27017/OrangeDBVersion0")
 app.get('/msg',(req,res)=>{
     res.send("Welcome To Authentication !");
 });
-const jwt = require('jsonwebtoken');
+
 
 function authenticateToken(req, res, next) {
   const authHeader = req.headers["authorization"];
@@ -60,6 +65,105 @@ app.post('/insert', async (req, res) => {
         res.status(500).json({ error: 'Internal server error' });
     }
 });
+
+
+app.get('/msg',(req,res)=>{
+    res.send("Welcome To Authentication !");
+});
+
+app.post('/CreateForm', async (req, res) => {
+    try {
+        const { name, startDate, reminderDate, coaches } = req.body;
+        if (!moment(startDate).isSameOrAfter(moment().format('YYYY-MM-DD'))) {
+            return res.status(400).json({ error: "Start date must be today or in the future" });
+        }
+        if (!moment(reminderDate).isSameOrAfter(startDate) || (!moment(reminderDate).isSameOrAfter(moment().format('YYYY-MM-DD')))) {
+            return res.status(400).json({ error: "Reminder date must be after the start date" });
+        }
+        const newForm = new FormModel({
+            name,
+            startDate,
+            reminderDate,
+            coaches
+        });
+
+        await newForm.save();
+
+        res.status(201).json({ message: "Form data inserted successfully", form: newForm });
+    } catch (error) {
+        console.error("Error inserting form data:", error);
+        res.status(500).json({ error: "Internal server error" });
+    }
+});
+
+app.post('/CreateSession', async (req, res) => {
+  try {
+      const { Name,startDate,selectedEvent } = req.body;
+
+      const newSessionForm = new SessionFormModel({
+          Name,
+          startDate,
+          selectedEvent
+      });
+
+      await newSessionForm.save();
+
+      res.status(201).json({ message: "Form data inserted successfully", form: newSessionForm });
+  } catch (error) {
+      console.error("Error inserting form data:", error);
+      res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+
+app.get('/GetSessionData', async (req, res) => {
+  try {
+      const formData = await SessionFormModel.find();
+      res.status(200).json(formData);
+  } catch (error) {
+      console.error("Error fetching form data:", error);
+      res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+
+
+  app.get('/GetFormData', async (req, res) => {
+    try {
+        // Retrieve all form data from the database
+        const formData = await FormModel.find();
+        // Send the retrieved form data as a response
+        res.status(200).json(formData);
+    } catch (error) {
+        console.error("Error fetching form data:", error);
+        res.status(500).json({ error: "Internal server error" });
+    }
+});
+
+
+
+function verifyToken(req, res, next) {
+    const token = req.headers['authorization'];
+    if (!token) return res.status(401).json({ auth: false, message: 'No token provided.' });
+
+    jwt.verify(token, 'SecretToken', function(err, decoded) {
+        if (err) return res.status(500).json({ auth: false, message: 'Failed to authenticate token.' });
+        if (blacklist.has(token)) return res.status(401).json({ auth: false, message: 'Token revoked.' });
+
+        req.userId = decoded.id;
+        next();
+    });
+}
+
+
+app.post('/logout', verifyToken, (req, res) => {
+    const token = req.headers['authorization'];
+    blacklist.add(token);
+    return res.json({ auth: false, message: 'Logged out successfully.' });
+});
+
+
+
 app.post('/Login' , async (req,res)=>{
     const User = await Model.findOne({
         Email : req.body.Email,
@@ -173,6 +277,22 @@ app.get('/coordinators', async (req, res) => {
   }
 });
 
+app.get('/coordinators', async (req, res) => {
+  try {
+  const userEmail = req.query.Email;
+  const userData = await Model.findOne({ Email: userEmail });
+  
+  if (!userData) {
+  return res.status(404).send('Coordinator not found');
+  }
+  
+  res.status(200).json(userData);
+  } catch (err) {
+  console.error(err);
+  res.status(500).send('Server Error');
+  }
+  });
+
 app.get('/participants', async (req, res) => {
   try {
     // Fetch data from the 'participants' collection using the model
@@ -247,6 +367,35 @@ app.get('/programsStatistic', async (req, res) => {
           res.status(500).json({ success: false, error: error.message });
       }
   };
+  app.patch("/updatecoordinator", async (req,res) =>{
+    const email = req.body.newUserData.email
+    const password = req.body.newUserData.password
+    const role = req.body.newUserData.role
+    const phoneNumber = req.body.newUserData.phoneNumber
+    const username = req.body.newUserData.username
+    const userEmail = req.body.userEmail
+    try {
+      // Update the user based on the email
+      const updatedUser = await User.findOneAndUpdate(
+        { Email: userEmail }, // Find user by email
+        { Password: password, Role: role, phoneNumber: phoneNumber, FullName: username , Email: email}, // New values to update
+        { new: true } // Return the updated user
+      );
+  
+      if (updatedUser) {
+        // User updated successfully
+        res.status(200).json({ message: 'User updated successfully', user: updatedUser });
+      } else {
+        // User with the provided email not found
+        res.status(404).json({ error: 'User not found' });
+      }
+    } catch (err) {
+      // Handle any errors
+      console.error(err);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  })
+  
   
   app.post("/insertstatisticMonth", insertStatisticMonth);
 

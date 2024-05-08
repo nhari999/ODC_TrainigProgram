@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import 'boosted/dist/css/boosted.min.css';
-
-import axios from 'axios'; // Import Axios
+import axios from 'axios'; 
 import { NavLink } from 'react-router-dom';
+import { BiPlus, BiSearch} from 'react-icons/bi';
+
 
 
 function ManageAccount() {
   const [coordinators, setCoordinators] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
     fetchCoordinators();
@@ -14,8 +16,8 @@ function ManageAccount() {
 
   const fetchCoordinators = async () => {
     try {
-      const response = await axios.get('http://localhost:4000/coordinators'); // Use axios to make the GET request
-      const data = response.data; // Access the data property of the response object
+      const response = await axios.get('http://localhost:4000/coordinators');
+      const data = response.data;
       console.log("Fetched coordinators:", data.coordinators);
       setCoordinators(data.coordinators);
     } catch (error) {
@@ -23,41 +25,59 @@ function ManageAccount() {
     }
   };
 
-
   const deleteCoordinator = async (id) => {
     try {
       const response = await axios.delete(`http://localhost:4000/deleteCoordinator/${id}`);
       console.log('Coordinator deleted:', response.data.coordinator);
-      // After successful deletion, fetch coordinators again to update the list
       fetchCoordinators();
     } catch (error) {
       console.error('Error deleting coordinator:', error);
     }
   };
-  
+
+  const handleSearch = (e) => {
+    setSearchQuery(e.target.value.toLowerCase());
+  };
+
+  const filteredCoordinators = coordinators.filter(coordinator => {
+    if (searchQuery && coordinator && coordinator.fullName) {
+      const query = searchQuery.toLowerCase();
+      const fullName = coordinator.fullName.toLowerCase();
+      return fullName.startsWith(query);
+    }
+    return true;
+  });
 
   return (
-    <div style={{ width: "70%", marginLeft: " 12%" }}>
+    <div style={{ marginTop: "5%", width: "70%", marginLeft: " 12%" }}>
       <div>
-        <h6 style={{ marginTop: "10%", fontSize: '4rem' }}>Manage Accounts</h6>
+        <h6 style={{ marginTop: "10%", fontSize: '4rem' }}>Gérer les comptes</h6>
         <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "3%" }}>
+        <button onClick={() => window.location.href = "/CreateAccount"} type="button" className="btn btn-primary btn-lg" style={{ display: "flex", justifyContent: "center", borderRadius: "4%", height: "70%", width: "16%" }}>
+      <BiPlus size={24} style={{ marginRight: "5px",color: "white" }} />
+      <span style={{ fontSize: "120%", color: "white" }}> Ajouter </span>
+    </button>
 
-
-          <button onClick={() => window.location.href = "/CreateAccount"} type="button" className="btn btn-primary btn-lg" style={{ display: "flex", justifyContent: "center", borderRadius: "4%", height: "70%", width: "16%" }}>
-            <img src={process.env.PUBLIC_URL + "/asset/add.png"} alt="Orange" style={{ width: "6%" }} />
-            <text style={{ fontSize: "120%", color: "white" }} > Add</text>
-          </button>
-          <form className="d-flex navbar-item ms-3" role="search" style={{ height: "90%" }}>
-            <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" style={{ borderRadius: "4%" }} />
-            <button className="btn btn-primary" type="submit" style={{ height: "90%", borderRadius: "4%" }}>Search</button>
-          </form>
-
+    <form className="d-flex navbar-item ms-3" role="search" style={{ height: "90%" }}>
+      <div className="input-group">
+        <input 
+          className="form-control me-2" 
+          type="search" 
+          placeholder="Rechercher" 
+          aria-label="Search" 
+          style={{ borderRadius: "4%", paddingLeft: "38px" }} 
+          onChange={handleSearch} 
+        />
+        <span className="input-group-text bg-transparent border-0" style={{ borderRight: "none" }}>
+          <BiSearch size={20} />
+        </span>
+      </div>
+    </form>
+          
         </div>
       </div>
-      <div className="table-responsive" style={{ width: "100%" }}>
+      <div className="table-responsive" style={{ marginTop: "2%", width: "100%" }}>
         <table className="table table-sm table-hover has-checkbox" >
-
-
           <thead>
             <tr>
               <th scope="col">
@@ -74,29 +94,25 @@ function ManageAccount() {
             </tr>
           </thead>
           <tbody>
-
-          {coordinators.map((coordinator) => (
-  <tr key={coordinator._id}>
-    <td>
-      <div className="form-check mb-0">
-        <label className="form-check-label" htmlFor={`customCheck${coordinator._id}`}>
-          <span className="visually-hidden">Select row {coordinator.fullName}</span>
-        </label>
-      </div>
-    </td>
-    <td>
-      <img src={process.env.PUBLIC_URL + "/asset/avatar.png"} style={{ width: "6%", marginTop: "0%", borderRadius: "50%" }} />
-      {coordinator.fullName}
-    </td>
-    <td>{coordinator.email}</td>
-    <td><button type="button" className="btn btn-outline-secondary" style={{ borderRadius: "8%" }}> <NavLink to="/EditProfile" className="dropdown-item">Modify</NavLink></button></td>
-    <td><button type="button" className="btn btn-danger" style={{ borderRadius: "8%" }} onClick={() => deleteCoordinator(coordinator._id)}>Delete</button></td>
-  </tr>
-))}
-
-</tbody>
-
-
+            {filteredCoordinators.map((coordinator) => (
+              <tr key={coordinator._id}>
+                <td>
+                  <div className="form-check mb-0">
+                    <label className="form-check-label" htmlFor={`customCheck${coordinator._id}`}>
+                      <span className="visually-hidden">Select row {coordinator.fullName}</span>
+                    </label>
+                  </div>
+                </td>
+                <td>
+                  <img src={process.env.PUBLIC_URL + "/asset/avatar.png"} style={{ width: "6%", marginTop: "0%", borderRadius: "50%" }} />
+                  {coordinator.fullName}
+                </td>
+                <td>{coordinator.email}</td>
+                <td><button type="button" className="btn btn-outline-secondary" style={{ borderRadius: "8%" }}> <NavLink to="/EditProfile" className="dropdown-item">Modifier</NavLink></button></td>
+                <td><button type="button" className="btn btn-danger" style={{ borderRadius: "8%" }} onClick={() => deleteCoordinator(coordinator._id)}>Supprimer</button></td>
+              </tr>
+            ))}
+          </tbody>
         </table>
       </div>
     </div>
