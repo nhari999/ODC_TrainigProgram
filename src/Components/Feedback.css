@@ -1,0 +1,42 @@
+input[type=radio]{
+    display:none;
+}
+.star{
+    cursor:pointer;
+}
+.feedback-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.feedback-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    border:2px solid orangered;
+}
+
+.feedback-item {
+    margin-bottom: 20px;
+}
+
+.stars-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.star {
+    cursor: pointer;
+    margin-right: 5px;
+}
+.feedback-container p {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+}
