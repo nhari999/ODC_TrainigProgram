@@ -16,7 +16,7 @@ import TablePerProgram from './Components/StatisticsTables/StatisticPerProgram';
 import Programs from "./Components/StatisticsTables/Programs"
 import TablePerTrainer from './Components/StatisticsTables/StatisticTrainers';
 import Trainers from './Components/StatisticsTables/Trainers';
-
+import FeedbackForm from './Components/FeedbackForm';
 import AddSession from './Components/AddSession';
 
 
@@ -60,6 +60,8 @@ function AppContent() {
         <Route path="/EditProfile" element={<EditProfile />} />
         <Route path="/TablePerProgram" element={<TablePerProgram Programs={Programs} />} />
         <Route path="/TablePerTrainer" element={<TablePerTrainer Trainers={Trainers} />} />
+        <Route path="/Feedback" element={<FeedbackForm/>} />
+
    <Route path="/AddSession" element={<AddSession />} />
       </Routes>
 
